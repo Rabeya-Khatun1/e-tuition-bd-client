@@ -4,12 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../Hooks/useAuth';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const Register = () => {
 
-  const { signInUser, user, } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+ 
+  const { signInUser, forgetPassword } = useAuth();
+  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,14 +20,33 @@ const Register = () => {
     signInUser(data.email, data.password)
       .then(result => {
         console.log(result.user)
-        navigate(location?.pathname || '/')
+        navigate(location?.state || '/')
+      })
+      .catch(err=> {
+        console.log(err)
+      
       })
   }
 
+  const handleForgotPassword = (email)=>{
+
+if(!email){
+  toast.info('Please enter your email first')
+  return 
+}
+
+forgetPassword(email)
+.then(()=>{
+  toast.success('Your password will reset, now check your inbox')
+})
+.catch(err=>{
+  console.log(err)
+})
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center  px-4 py-4">
-
+<ToastContainer></ToastContainer>
       <div className="flex flex-col lg:flex-row-reverse items-center w-full max-w-6xl bg-linear-to-br from-green-500 to-red-300 shadow-2xl rounded-3xl overflow-hidden">
 
 
@@ -68,6 +89,7 @@ const Register = () => {
                   className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
                 />
                 {errors.password && <p className='text-red-400'>Password is required</p>}
+                <small onClick={()=>handleForgotPassword(getValues('email'))} className=''>Forget Password</small>
               </div>
 
               <button className="w-full py-3 mt-4 bg-linear-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition">
@@ -75,7 +97,7 @@ const Register = () => {
               </button>
             </form>
             <p className="text-center text-gray-500 text-sm mt-4">
-              Already have an Account? Please
+              New to Our Website? Please
               <Link className='text-black underline m-2' to='/register'>Register</Link>
             </p>
             <SocialLogin className=''></SocialLogin>
