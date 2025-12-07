@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import { AuthContext } from '../../../../../../milestone11.module60/zap-shift-client/src/Context/AuthContext';
+
 import { auth } from '../../../../firebase.init';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 
 const AuthProvider = ({children}) => {
@@ -50,6 +51,7 @@ return ()=>{
 
 const authInfo = {
     loading, 
+    setLoading,
     user,
      setUser,
 signUpUser ,
