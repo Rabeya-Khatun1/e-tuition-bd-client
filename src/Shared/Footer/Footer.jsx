@@ -1,12 +1,20 @@
 import React from 'react';
+import twitter from '../../assets/twitter.png'
+import Logo from '../../Components/Logo/Logo'
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral text-neutral-content p-10">
+<div className='bg-neutral text-neutral-content p-5'>
+      <footer className="bg-neutral flex flex-col justify-start items-start text-neutral-content p-10">
+      <div className='my-10'>
+        <Logo></Logo>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-
+ 
         {/* About Platform */}
         <div>
+
+
           <h6 className="footer-title text-white font-bold mb-2">About Platform</h6>
           <p className="text-neutral-content text-sm">
             Our platform provides powerful tools and resources to help you stay connected,
@@ -38,7 +46,7 @@ const Footer = () => {
         <div>
           <h6 className="footer-title text-white font-bold mb-2">Follow Us</h6>
           <div className="flex space-x-3 mt-2">
-            <a href="#"><img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023.svg" alt="X"/></a>
+            <a href="#"><img className="w-6 h-6" src={twitter} alt="X"/></a>
             <a href="#"><img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="Facebook"/></a>
             <a href="#"><img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"/></a>
             <a href="#"><img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"/></a>
@@ -48,10 +56,12 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="text-center mt-8 border-t border-neutral-content/20 pt-4 text-sm">
+     
+    </footer>
+     <div className="text-center mt-8 border-t border-neutral-content/20 pt-4 text-sm">
         © 2025 YourCompanyName. All rights reserved.
       </div>
-    </footer>
+</div>
   );
 };
 
