@@ -5,7 +5,7 @@ const Logo = () => {
     return (
         <div className='flex justify-center items-center'>
             <img className='w-[21px] h-[21px] m-2' src={logo} alt="" />
-            <h2>TUITION BD</h2>
+            <h2 className='font-bold'>TUITION BD</h2>
         </div>
     );
 };
