@@ -13,7 +13,7 @@ const Navbar = () => {
     <Link to='/tutors' className='m-2'><a>Tutors</a></Link>
     <Link className='m-2'><a> About </a></Link>
     <Link className='m-2'><a>Contact </a></Link>
-    <Link to='/dashboard' className='m-2'><a>Contact </a></Link>
+    <Link to='/dashboard' className='m-2'><a>Dashboard </a></Link>
 
   </>
 const navigate = useNavigate();

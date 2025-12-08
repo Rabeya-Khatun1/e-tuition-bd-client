@@ -1,44 +1,173 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useAuth from '../../Hooks/useAuth';
+import { CiEdit } from "react-icons/ci";
+import { FaCamera } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import Loading from '../../Components/Loading/Loading';
 
 const ProfileSettings = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: userData, isLoading } = useQuery({
+  const [openField, setOpenField] = useState(null);  
+  const [formData, setFormData] = useState({
+    name: '',
+    phoneNumber: '',
+    photoURL: '',
+  });
+
+  const { data: userData, isLoading, refetch } = useQuery({
     queryKey: ['user', user?.email],
     queryFn: async () => {
-      
       const res = await axiosSecure.get(`/users/${user.email}/role`);
       return res.data;
     }
   });
 
-  if (isLoading) return <p className="text-center mt-4">Loading...</p>;
-  if (!userData) return <p className="text-center mt-4">No user data found</p>;
+  if (isLoading) 
+    return <Loading></Loading>;
+
+  if (!userData) 
+    return <p className="text-center mt-6 text-lg text-gray-500">No user data found</p>;
+
+  const handleOnChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+
+  const handleUpdate = async () => {
+    
+      const updatedData = {};
+
+      if (openField === "name") {
+        updatedData.name = formData.name;
+      }
+      if (openField === "phoneNumber") {
+        updatedData.phoneNumber = formData.phoneNumber;
+      }
+      if (openField === "photoURL") {
+        updatedData.photoURL = formData.photoURL;
+      }
+
+      const res = await axiosSecure.patch(`/users/update/${user?.email}`, updatedData);
+console.log(res.data)
+console.log("Sending updated data:", updatedData, "to", );
+
+      if (res.data.modifiedCount > 0) {
+        toast.success("Profile updated successfully!");
+        refetch();
+      } else {
+        toast.info("No changes were made.");
+      }
+
+      setOpenField(null);
+
+ 
+  };
+
+  const openEdit = (field) => {
+    setOpenField(field);
+    setFormData({
+      name: userData?.name || '',
+      phoneNumber: userData?.phoneNumber || '',
+      photoURL: userData?.photoURL || '',
+    });
+  };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-base-200 rounded-xl shadow-lg mt-6">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-linear-to-br from-green-500 to-red-300 rounded-3xl shadow-2xl border border-white/30">
+
+  <ToastContainer></ToastContainer>
       <div className="flex flex-col items-center gap-4">
-        {userData.photoURL && (
+        <div className="relative w-32 h-32">
           <img 
-            src={userData.photoURL} 
+            src={userData.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"} 
             alt="Profile" 
-            className="w-24 h-24 rounded-full object-cover border-2 border-primary"
+            className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl"
           />
-        )}
-        <h2 className="text-2xl font-bold">{userData.name || ' Name:'}</h2>
-        <p className="text-gray-600"><strong>Email:</strong> {userData.email}</p>
-        <p className="text-gray-600"><strong>Role:</strong> {userData.role}</p>
+
+          <button 
+            onClick={() => openEdit("photoURL")}
+            className="absolute bottom-1 right-1 bg-white/80 p-2 rounded-full text-gray-700 hover:bg-white transition-shadow shadow-lg">
+            <FaCamera />
+          </button>
+        </div>
+
+        <h2 className="text-3xl font-extrabold text-white drop-shadow-md">
+          {userData.name || 'No Name'}
+        </h2>
+        <p className="text-white/90"><strong>Email:</strong> {userData.email}</p>
+        <p className="text-white/90"><strong>Role:</strong> {userData.role}</p>
       </div>
 
-      <div className="mt-6 space-y-2">
-        <p><strong>Phone:</strong> {userData.phoneNumber || ''}</p>
-       
-       
+     
+      <div className="mt-8 space-y-4">
+
+ 
+        <div 
+          className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-xl shadow-lg cursor-pointer"
+          onClick={() => openEdit("phoneNumber")}
+        >
+          <div>
+            <p className="text-white/80 text-sm font-medium">Phone</p>
+            <p className="text-white font-semibold">{userData.phoneNumber || 'Not added'}</p>
+          </div>
+          <CiEdit size={22} className="text-white" />
+        </div>
+
+   
+        <div 
+          className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-xl shadow-lg cursor-pointer"
+          onClick={() => openEdit("name")}
+        >
+          <div>
+            <p className="text-white/80 text-sm font-medium">Name</p>
+            <p className="text-white font-semibold">{userData.name || 'No Name'}</p>
+          </div>
+          <CiEdit size={22} className="text-white" />
+        </div>
+
       </div>
+
+
+      {openField && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center backdrop-blur-sm">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-80 space-y-4">
+
+            <h3 className="text-xl font-bold text-center capitalize">
+              Update {openField}
+            </h3>
+
+            <input
+              type="text"
+              name={openField}
+              className="input input-bordered w-full"
+              value={formData[openField]}
+              onChange={handleOnChange}
+            />
+
+            <div className="flex justify-between mt-4">
+              <button 
+                className="btn btn-error btn-sm text-white"
+                onClick={() => setOpenField(null)}
+              >
+                Cancel
+              </button>
+
+              <button 
+                className="btn btn-primary btn-sm"
+                onClick={handleUpdate}
+              >
+                Update
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
