@@ -15,6 +15,8 @@ import Payments from "../Pages/StudentDashboard/Payments";
 import ProfileSettings from "../Pages/StudentDashboard/ProfileSettings";
 import PaymentCanceled from "../Pages/StudentDashboard/PaymentCanceled";
 import PaymentSuccess from "../Pages/StudentDashboard/PaymentSuccess";
+import UpdateTuitions from "../Pages/StudentDashboard/UpdateTuitions";
+
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: 'postTuition',
         Component:PostTuition,
+      },
+      {
+        path: 'updateTuition/:id',
+        Component: UpdateTuitions,
       },
       {
         path:'appliedTutors',

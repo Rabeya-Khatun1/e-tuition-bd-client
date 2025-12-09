@@ -22,8 +22,8 @@ const handleSignOut = ()=>{
   signOutUser()
   .then( ()=>{
     Swal.fire({
-  title: "Good job!",
-  text: "You clicked the button!",
+  title: "Logged Out!",
+  text: "You have been logged out successfully!",
   icon: "success"
 });
     navigate('/login')

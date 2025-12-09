@@ -5,24 +5,36 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../../../Hooks/useAuth';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useAxios from '../../../../Hooks/useAxios'
 
 const Register = () => {
 
   const navigate = useNavigate();
-  const { signUpUser } = useAuth();
+  const { signUpUser,updateUserProfile, } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const axiosSecure = useAxiosSecure();
+  const axios = useAxios();
   const handleUserRegister = (data) => {
 
+         const photoImg = data.photo[0];
+
     signUpUser(data.email, data.password,)
-      .then(result => {
-        console.log(result.user)
+      .then((result)=> {
+        console.log('ussr is',result)
+  const formData = new FormData();
+      formData.append("image", photoImg);
+      const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`;
+
+      axios.post(image_API_URL,formData)
+      .then( (result)=>{
+const photoURL = result.data.data.url
 
         const userInfo = {
           displayName: data.name,
           email: data.email,
-          role: data.role,
-          phoneNumber: data.phoneNumber
+          photoURL:photoURL,
+          phoneNumber: data.phoneNumber,
+          role:data.role,
         }
         axiosSecure.post('/users', userInfo)
           .then(res => {
@@ -36,12 +48,33 @@ const Register = () => {
             }
           })
 
+const userProfile = {
+displayName:data.name,
+photoURL:photoURL
+}
 
+updateUserProfile(userProfile)
+.then(result=>{
+  console.log('user update done',result)
+navigate(location?.state || '/')
+
+
+})
+.catch(error => {
+  console.log(error)
+})
 
       })
       .catch(err => {
         console.log(err)
       })
+
+
+      })
+.catch(err=> {
+  console.log(err)
+})
+
 
 
 
@@ -93,6 +126,15 @@ const Register = () => {
               />
               {errors.email && <p className='text-red-400'>Enter Your email before register</p>}
             </div>
+              {/* Photo Upload */}
+            <label className="label mt-3">Photo</label>
+            <input
+              type="file"
+              
+              {...register("photo", { required: true })}
+              className="file-input file-input-bordered w-full"
+            />
+            {errors.photo && <p className="text-red-400 text-sm">Photo is required.</p>}
             <div>
               {/* password  */}
               <label className="block text-gray-700 font-medium">Password</label>

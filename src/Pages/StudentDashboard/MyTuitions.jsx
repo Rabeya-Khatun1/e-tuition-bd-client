@@ -3,12 +3,14 @@ import React from 'react';
 import { FaCheck, FaHourglassHalf, FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const MyTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: tuitions = [], } = useQuery({
+  const { data: tuitions = [], refetch} = useQuery({
     queryKey: ['tuitions', user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tuitions?email=${user?.email}`);
@@ -57,6 +59,35 @@ window.location.assign(res.data.url)
 
 }
 
+const handleRemoveTuition = (id)=>{
+  Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+
+  axiosSecure.delete(`/tuitions/${id}`)
+  .then(res=> {
+    if(res.data.deletedCount){
+ if (result.isConfirmed) {
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+  }
+  refetch()
+    }
+  })
+
+
+ 
+});
+}
 
   return (
     <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
@@ -93,11 +124,11 @@ window.location.assign(res.data.url)
               <td>{tuition.days}</td>
               <td>{tuition.time}</td>
               <td className="flex gap-2">
-                <button className="btn btn-sm btn-info flex items-center gap-1">
+               <Link to={`../updateTuition/${tuition._id}`}> <button className="btn btn-sm btn-info flex items-center gap-1">
                   <FaEdit /> Edit
-                </button>
-                <button className="btn btn-sm btn-error flex items-center gap-1">
-                  <FaTrash /> Remove
+                </button></Link>
+                <button onClick={()=>handleRemoveTuition(tuition._id)} className="btn btn-sm btn-error flex items-center gap-1">
+                  <FaTrash /> Delete
                 </button>
   
 

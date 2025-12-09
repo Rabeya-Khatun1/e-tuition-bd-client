@@ -1,94 +1,90 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useAuth from '../../Hooks/useAuth';
 import { CiEdit } from "react-icons/ci";
 import { FaCamera } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
-import Loading from '../../Components/Loading/Loading';
 
 const ProfileSettings = () => {
-  const { user } = useAuth();
+  const { user, setUser, updateUserProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const [openField, setOpenField] = useState(null);  
+  const [openField, setOpenField] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
-    photoURL: '',
+    photoURL: ''
   });
 
-  const { data: userData, isLoading, refetch } = useQuery({
-    queryKey: ['user', user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/users/${user.email}/role`);
-      return res.data;
-    }
-  });
-
-  if (isLoading) 
-    return <Loading></Loading>;
-
-  if (!userData) 
-    return <p className="text-center mt-6 text-lg text-gray-500">No user data found</p>;
+  const openEdit = (field) => {
+    setOpenField(field);
+    setFormData({
+      name: user?.displayName || '',
+      phoneNumber: user?.phoneNumber || '',
+      photoURL: user?.photoURL || '',
+    });
+  };
 
   const handleOnChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   const handleUpdate = async () => {
+    const updatedData = {};
+
+    if (openField === "name") updatedData.displayName = formData.name;
+    if (openField === "phoneNumber") updatedData.phoneNumber = formData.phoneNumber;
+    if (openField === "photoURL") updatedData.photoURL = formData.photoURL;
+
     
-      const updatedData = {};
+      
+     axiosSecure.patch(`/users/update/${user?.email}`, updatedData)
+      .then(res=> {
+  if (res.data.modifiedCount > 0) {
 
-      if (openField === "name") {
-        updatedData.name = formData.name;
-      }
-      if (openField === "phoneNumber") {
-        updatedData.phoneNumber = formData.phoneNumber;
-      }
-      if (openField === "photoURL") {
-        updatedData.photoURL = formData.photoURL;
-      }
+       
+        if (openField === "name" || openField === "photoURL") {
+         updateUserProfile({
+            displayName: updatedData.displayName || user.displayName,
+            photoURL: updatedData.photoURL || user.photoURL
+          });
+        }
 
-      const res = await axiosSecure.patch(`/users/update/${user?.email}`, updatedData);
-console.log(res.data)
-console.log("Sending updated data:", updatedData, "to", );
+     
+        setUser({
+          ...user,
+          displayName: updatedData.displayName || user.displayName,
+          phoneNumber: updatedData.phoneNumber || user.phoneNumber,
+          photoURL: updatedData.photoURL || user.photoURL
+        });
 
-      if (res.data.modifiedCount > 0) {
         toast.success("Profile updated successfully!");
-        refetch();
       } else {
         toast.info("No changes were made.");
       }
+      })
+
+    
 
       setOpenField(null);
 
- 
-  };
 
-  const openEdit = (field) => {
-    setOpenField(field);
-    setFormData({
-      name: userData?.name || '',
-      phoneNumber: userData?.phoneNumber || '',
-      photoURL: userData?.photoURL || '',
-    });
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-linear-to-br from-green-500 to-red-300 rounded-3xl shadow-2xl border border-white/30">
+      <ToastContainer />
 
-  <ToastContainer></ToastContainer>
       <div className="flex flex-col items-center gap-4">
         <div className="relative w-32 h-32">
-          <img 
-            src={userData.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"} 
-            alt="Profile" 
+          <img
+            src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
+
+            alt="Profile"
             className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl"
           />
 
-          <button 
+          <button
             onClick={() => openEdit("photoURL")}
             className="absolute bottom-1 right-1 bg-white/80 p-2 rounded-full text-gray-700 hover:bg-white transition-shadow shadow-lg">
             <FaCamera />
@@ -96,41 +92,38 @@ console.log("Sending updated data:", updatedData, "to", );
         </div>
 
         <h2 className="text-3xl font-extrabold text-white drop-shadow-md">
-          {userData.name || 'No Name'}
+          {user?.displayName || "No Name"}
         </h2>
-        <p className="text-white/90"><strong>Email:</strong> {userData.email}</p>
-        <p className="text-white/90"><strong>Role:</strong> {userData.role}</p>
+
+        <p className="text-white/90"><strong>Email:</strong> {user?.email}</p>
+
       </div>
 
-     
       <div className="mt-8 space-y-4">
 
- 
-        <div 
+        <div
           className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-xl shadow-lg cursor-pointer"
           onClick={() => openEdit("phoneNumber")}
         >
           <div>
             <p className="text-white/80 text-sm font-medium">Phone</p>
-            <p className="text-white font-semibold">{userData.phoneNumber || 'Not added'}</p>
+            <p className="text-white font-semibold">{user?.phoneNumber || "Not added"}</p>
           </div>
           <CiEdit size={22} className="text-white" />
         </div>
 
-   
-        <div 
+        <div
           className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-xl shadow-lg cursor-pointer"
           onClick={() => openEdit("name")}
         >
           <div>
             <p className="text-white/80 text-sm font-medium">Name</p>
-            <p className="text-white font-semibold">{userData.name || 'No Name'}</p>
+            <p className="text-white font-semibold">{user?.displayName || "No Name"}</p>
           </div>
           <CiEdit size={22} className="text-white" />
         </div>
 
       </div>
-
 
       {openField && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center backdrop-blur-sm">
@@ -149,14 +142,14 @@ console.log("Sending updated data:", updatedData, "to", );
             />
 
             <div className="flex justify-between mt-4">
-              <button 
+              <button
                 className="btn btn-error btn-sm text-white"
                 onClick={() => setOpenField(null)}
               >
                 Cancel
               </button>
 
-              <button 
+              <button
                 className="btn btn-primary btn-sm"
                 onClick={handleUpdate}
               >

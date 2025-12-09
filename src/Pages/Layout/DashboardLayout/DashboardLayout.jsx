@@ -10,6 +10,7 @@ import Logo from '../../../Components/Logo/Logo';
 const DashboardLayout = () => {
     return (
         <div className="drawer lg:drawer-open">
+          
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
             <div className="drawer-content">
@@ -22,9 +23,9 @@ const DashboardLayout = () => {
                             <path d="M14 10l2 2l-2 2"></path>
                         </svg>
                     </label>
-                    <div className="px-4">
+                    <Link to='/'><div className="px-4">
                       <Logo></Logo>
-                    </div>
+                    </div></Link>
                 </nav>
 
                 {/* PAGE CONTENT */}
