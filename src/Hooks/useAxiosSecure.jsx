@@ -31,8 +31,10 @@ const responseInterceptors = axiosSecure.interceptors.response.use((response) =>
     const statusCode = error?.response.status;
 if(statusCode === 401 || statusCode === 403){
 signOutUser()
-.then(
-    navigate('/login')
+.then(()=>{
+navigate('/login')
+}
+    
 )
 }
 
@@ -44,7 +46,7 @@ axiosSecure.interceptors.response.eject(responseInterceptors)
 }
 
 
-},[user, signOutUser, navigate])
+},[user, signOutUser, navigate,axiosSecure])
 
 return axiosSecure;
 };

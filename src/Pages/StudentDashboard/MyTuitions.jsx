@@ -45,19 +45,6 @@ const paidTuitions = tuitions.filter(tuition => tuition.paymentStatus !== 'paid'
     }
   };
 
-const handleTuitionPayment = async(tuition)=>{
-  const paymentInfo = {
-    email:tuition.email,
-studentName:tuition.name,
-tuitionId:tuition._id,
-budget:tuition.budget,
-  }
-
-const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
-
-window.location.assign(res.data.url)
-
-}
 
 const handleRemoveTuition = (id)=>{
   Swal.fire({
@@ -118,7 +105,10 @@ const handleRemoveTuition = (id)=>{
               <td>{tuition.class}</td>
               <td>{tuition.location}</td>
               <td>{handleStatusBadge(tuition.status)}</td>
-              <p onClick={()=>handleTuitionPayment(tuition)} className=" py-1 px-1 text-center bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md transition">Pay</p>
+              <td>
+                {tuition.paymentStatus === 'paid' ? <p  className=" py-1 px-1 text-center text-green-500 font-semibold rounded-lg shadow-md transition">paid</p>  : <p  className=" py-1 px-1 text-center bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md transition">Unpaid</p>}
+              </td>
+              
               <td>{tuition.budget}</td>
               <td>{tuition.phoneNumber}</td>
               <td>{tuition.days}</td>

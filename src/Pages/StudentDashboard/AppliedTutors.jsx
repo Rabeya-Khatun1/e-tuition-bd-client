@@ -3,11 +3,12 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaCheck, FaEdit, FaHourglassHalf, FaTimes, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const AppliedTutors = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: appliedTutors = [] } = useQuery({
+    const { data: appliedTutors = [], refetch } = useQuery({
         queryKey: ['appliedTutors'],
         queryFn: async () => {
             const res = await axiosSecure.get('/applications');
@@ -28,9 +29,53 @@ const AppliedTutors = () => {
         }
     };
 
-    const handleRemoveappliedTutor = (id) => {
-        console.log("Remove applied tutor:", id);
-    }
+
+const handleApproveAppliedTutor = async(appliedTutors)=>{
+  const paymentInfo = {
+    email:appliedTutors.email,
+studentName:appliedTutors.tuitionPostName,
+tuitionId:appliedTutors.tuitionPostId,
+budget:appliedTutors.
+tuitionPostBudget,
+applicationId:appliedTutors._id
+  }
+
+const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
+
+window.location.assign(res.data.url)
+
+}
+
+
+ const handleRemoveappliedTutor = (id)=>{
+   Swal.fire({
+   title: "Are you sure?",
+   text: "You won't be able to revert this!",
+   icon: "warning",
+   showCancelButton: true,
+   confirmButtonColor: "#3085d6",
+   cancelButtonColor: "#d33",
+   confirmButtonText: "Yes, delete it!"
+ }).then((result) => {
+ 
+   axiosSecure.delete(`/applications/${id}`)
+   .then(res=> {
+     if(res.data.deletedCount){
+  if (result.isConfirmed) {
+     Swal.fire({
+       title: "Deleted!",
+       text: "Your file has been deleted.",
+       icon: "success"
+     });
+   }
+   refetch()
+     }
+   })
+ 
+ 
+  
+ });
+ }
 
     return (
         <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
@@ -40,6 +85,7 @@ const AppliedTutors = () => {
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <tr>Profile Picture</tr>
                         <th>Qualifications</th>
                         <th>Experiences</th>
                         <th>Status</th>
@@ -53,17 +99,21 @@ const AppliedTutors = () => {
                         <tr key={appliedTutor._id}>
                             <th>{index + 1}</th>
                             <td>{appliedTutor.name}</td>
+                            <td>
+                                <img src={appliedTutor.profilePhoto} alt="" />
+                            </td>
                             <td>{appliedTutor.qualifications}</td>
                             <td>{appliedTutor.experience}</td>
                             <td>{handleStatusBadge(appliedTutor.status)}</td>
                             <td>{appliedTutor.expectedSalary}</td>
                             <td>{new Date(appliedTutor.date).toLocaleDateString()}</td>
                             <td className="flex gap-2">
-                                <Link to={`../updateappliedTutor/${appliedTutor._id}`}>
-                                    <button className="btn btn-sm btn-info flex items-center gap-1">
+                               
+                               
+                                    <button onClick={()=>handleApproveAppliedTutor(appliedTutor)} className="btn btn-sm btn-info flex items-center gap-1">
                                         <FaEdit /> Approve
                                     </button>
-                                </Link>
+                              
                                 <button onClick={() => handleRemoveappliedTutor(appliedTutor._id)} className="btn btn-sm btn-error flex items-center gap-1">
                                     <FaTrash /> Reject
                                 </button>
