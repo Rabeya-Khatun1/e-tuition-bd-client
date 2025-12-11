@@ -4,24 +4,19 @@ import { motion } from "framer-motion";
 import useAxios from '../../Hooks/useAxios';
 import { IoLocation } from 'react-icons/io5';
 import { FaRegClock } from 'react-icons/fa';
-import useAuth from '../../Hooks/useAuth';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
+
 
 const Tuitions = () => {
   const axios = useAxios();
-  const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
 
-  const [appliedTuitions, setAppliedTuitions] = useState([]);
+
+
   const [page, setPage] = useState(1);
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedTuition, setSelectedTuition] = useState(null);
-const navigate = useNavigate();
 
-  const { data = {}, refetch } = useQuery({
+
+
+  const { data = {}, } = useQuery({
     queryKey: ['tuitions', page],
     queryFn: async () => {
       const res = await axios.get(`/tuitions?page=${page}`);
@@ -32,82 +27,8 @@ const navigate = useNavigate();
   const tuitions = data.tuitions || [];
   const totalPages = data.totalPages || 1;
 
-  // useForm hook
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      name: user?.displayName || "",
-      qualifications: "",
-      experience: "",
-      expectedSalary: "",
-    }
-  });
 
-  const handleFormSubmit = (data) => {
-    const tutorInfo = {
-      ...data,
-      email: user?.email,
-      profilePhoto: user?.photoURL,
-      tuitionPostId: selectedTuition?._id,
-      tuitionPostName:selectedTuition?.name,
-      tuitionPostClass:selectedTuition?.class,
-      tuitionPostBudget:selectedTuition?.budget,
-      tutionPostLocation:selectedTuition?.location,
-      tuitionPostTime:selectedTuition?.time,
-      tuitionPostDays:selectedTuition?.days,
-      tuitionPostSubject:selectedTuition?.subject,
-      tuitionPostPaymentStatus:selectedTuition?.paymentStatus,
 
-      status: "pending",
-      date: new Date(),
-    };
-
-    axiosSecure.post('/applications', tutorInfo)
-      .then((res) => {
-        if (res.data.insertedId) {
-          refetch();
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your application has been submitted!',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          setOpenModal(false);
-          setAppliedTuitions(res=> [
-            ...res, selectedTuition._id
-          ])
-          reset(); 
-        } 
-      })
-      .catch(err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'This Tuition You Already Applied',
-          text: err?.response?.data?.message || err.message,
-        });
-      });
-  };
-
-const handleApplyButton = (tuition)=>{
-if (!user?.email) {
-  return Swal.fire({
-    icon: "warning",
-    title: "Please Login First!",
-    text: "You need to login to apply for this tuition.",
-    confirmButtonText: "OK",
-  }).then(() => {
-    navigate("/login");
-  });
-}
-             setSelectedTuition(tuition);
-                  reset({
-                    name: user?.displayName || "",
-                    qualifications: "",
-                    experience: "",
-                    expectedSalary: "",
-                  });
-                  setOpenModal(true);
-}
 
 
   return (
@@ -118,7 +39,7 @@ if (!user?.email) {
 
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-        {tuitions.filter(t=> !appliedTuitions.includes(t._id)).map((tuition, index) => (
+        {tuitions.map((tuition, index) => (
           <motion.div
             key={tuition._id || index}
             initial={{ opacity: 0, y: 40 }}
@@ -148,101 +69,19 @@ if (!user?.email) {
                 Posted on: {new Date(tuition.date).toLocaleDateString()}
               </p>
 
-              <button
-                onClick={() => handleApplyButton(tuition)
-                }
+            <Link to={`/viewTuitionDetails/${tuition._id}`}>  <button
+              
                 className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors"
               >
-                Apply
-              </button>
+                View Details
+              </button></Link>
             </div>
           </motion.div>
         ))}
       </div>
 
 
-      {openModal && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-xl p-6 w-96 shadow-xl relative">
-            <h2 className="text-xl font-bold mb-4 text-center">
-              Apply for {selectedTuition?.subject}
-            </h2>
-
-            <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-3">
-              {/* Name */}
-              <div>
-                <label className="text-sm font-semibold">Name</label>
-                <input
-                  type="text"
-                  {...register('name')}
-                  className="w-full border rounded-lg p-2"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="text-sm font-semibold">Email</label>
-                <input
-                  type="text"
-                  value={user?.email || ""}
-                  readOnly
-                  className="w-full border rounded-lg p-2 bg-gray-100"
-                />
-              </div>
-
-              {/* Qualifications */}
-              <div>
-                <label className="text-sm font-semibold">Qualifications</label>
-                <input
-                  type="text"
-                  {...register('qualifications')}
-                  className="w-full border rounded-lg p-2"
-                  placeholder="Your qualifications"
-                />
-              </div>
-
-              {/* Experience */}
-              <div>
-                <label className="text-sm font-semibold">Experience</label>
-                <input
-                  type="text"
-                  {...register('experience')}
-                  className="w-full border rounded-lg p-2"
-                  placeholder="Years of experience"
-                />
-              </div>
-
-              {/* Expected Salary */}
-              <div>
-                <label className="text-sm font-semibold">Expected Salary</label>
-                <input
-                  type="number"
-                  {...register('expectedSalary')}
-                  className="w-full border rounded-lg p-2"
-                  placeholder="Expected salary"
-                />
-              </div>
-
-              <div className="flex gap-3 mt-4">
-                <button
-                  type="button"
-                  className="flex-1 bg-gray-300 py-2 rounded-lg"
-                  onClick={() => setOpenModal(false)}
-                >
-                  Cancel
-                </button>
-
-                <button
-                  type="submit"
-                  className="flex-1 bg-blue-500 text-white py-2 rounded-lg"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+ 
 
       {/* Pagination */}
       <div className="flex justify-center items-center gap-6 my-10">

@@ -2,7 +2,6 @@ import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaCheck, FaEdit, FaHourglassHalf, FaTimes, FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 
 const AppliedTutors = () => {
@@ -30,14 +29,14 @@ const AppliedTutors = () => {
     };
 
 
-const handleApproveAppliedTutor = async(appliedTutors)=>{
+const handleApproveAppliedTutor = async(appliedTutor)=>{
   const paymentInfo = {
-    email:appliedTutors.email,
-studentName:appliedTutors.tuitionPostName,
-tuitionId:appliedTutors.tuitionPostId,
-budget:appliedTutors.
+    email:appliedTutor.email,
+studentName:appliedTutor.tuitionPostName,
+tuitionId:appliedTutor.tuitionPostId,
+budget:appliedTutor.
 tuitionPostBudget,
-applicationId:appliedTutors._id
+applicationId:appliedTutor._id
   }
 
 const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
@@ -45,7 +44,45 @@ const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
 window.location.assign(res.data.url)
 
 }
+const handleRejectAppliedTutor = async(appliedTutorId)=>{
+    
+   Swal.fire({
+   title: "Are you sure?",
+   text: "You won't be able to revert this!",
+   icon: "warning",
+   showCancelButton: true,
+   confirmButtonColor: "#3085d6",
+   cancelButtonColor: "#d33",
+   confirmButtonText: "Yes, delete it!"
+ }).then((result) => {
+ 
+     if (result.isConfirmed) {
+          axiosSecure.patch(`/applications/reject/${appliedTutorId}`)
+   .then(res=> {
 
+    const remainingAppliedTutors = appliedTutors.filter(appliedTutor => appliedTutor._id !== appliedTutorId)
+     if(res.data.modifiedCount){
+      Swal.fire({
+       title: "Rejected!",
+       text: "Your file has been Rejected.",
+       icon: "success"
+     });
+   refetch()
+     }
+   })
+   .catch(err=> {
+    console.log(err)
+   })
+
+
+   }
+ 
+ 
+ 
+  
+ });
+
+}
 
  const handleRemoveappliedTutor = (id)=>{
    Swal.fire({
@@ -100,7 +137,7 @@ window.location.assign(res.data.url)
                             <th>{index + 1}</th>
                             <td>{appliedTutor.name}</td>
                             <td>
-                                <img src={appliedTutor.profilePhoto} alt="" />
+                                <img className='w-[70px] h-[70px] rounded-2xl p-2' src={appliedTutor.profilePhoto} alt="" />
                             </td>
                             <td>{appliedTutor.qualifications}</td>
                             <td>{appliedTutor.experience}</td>
@@ -114,8 +151,11 @@ window.location.assign(res.data.url)
                                         <FaEdit /> Approve
                                     </button>
                               
-                                <button onClick={() => handleRemoveappliedTutor(appliedTutor._id)} className="btn btn-sm btn-error flex items-center gap-1">
+                                <button onClick={() => handleRejectAppliedTutor (appliedTutor._id)} className="btn btn-sm btn-warning flex items-center gap-1">
                                     <FaTrash /> Reject
+                                </button>
+                                <button onClick={() => handleRemoveappliedTutor(appliedTutor._id)} className="btn btn-sm btn-error flex items-center gap-1">
+                                    <FaTrash /> Remove
                                 </button>
                             </td>
                         </tr>

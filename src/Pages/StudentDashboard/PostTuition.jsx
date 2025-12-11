@@ -20,7 +20,7 @@ const tuitionInfo = {
     subject:data.subject,
     location:data.location,
     days:data.days,
-    time:data.time,
+    timing:data.time,
     budget:data.salary,
     phoneNumber:data.phoneNumber,
 }

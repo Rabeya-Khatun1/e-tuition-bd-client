@@ -23,7 +23,11 @@ import TutorRoutes from "./TutorRoutes";
 import MyApplications from "../Pages/TutorDashboard/MyApplications";
 import OngoingTuitions from "../Pages/TutorDashboard/OngoingTuitions";
 import RevenueHistory from "../Pages/TutorDashboard/RevenueHistory";
-
+import ViewTuitionDetails from '../Pages/Tuitions/ViewTuitionDetails'
+import AdminRoutes from "./AdminRoutes";
+import UserManagement from "../Pages/AdminDashboard/UserManagement";
+import TuitionManagement from "../Pages/AdminDashboard/TuitionManagement";
+import ReportAnalytics from "../Pages/AdminDashboard/ReportAnalytics";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +50,10 @@ export const router = createBrowserRouter([
         {
             path:'/beATutor',
             Component:BeATutor,
+        },
+        {
+            path:'/viewTuitionDetails/:id',
+            Component:ViewTuitionDetails,
         }
     ]
   },
@@ -111,7 +119,19 @@ export const router = createBrowserRouter([
       {
         path:'revenue-history',
         element:<TutorRoutes><RevenueHistory></RevenueHistory></TutorRoutes>
-      }
+      },
+      {
+        path:'user-management',
+        element:<UserManagement></UserManagement>
+      },
+      {
+        path:'tuition-management',
+        element:<AdminRoutes><TuitionManagement></TuitionManagement></AdminRoutes>
+      },
+      {
+        path:'report-analytics',
+        element:<AdminRoutes><ReportAnalytics></ReportAnalytics></AdminRoutes>
+      },
     ]
   }
   

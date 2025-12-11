@@ -3,8 +3,8 @@ import { FaChalkboard, FaUserGraduate } from 'react-icons/fa';
 import { IoHomeSharp } from 'react-icons/io5';
 import { PiChalkboardTeacherBold } from 'react-icons/pi';
 import { Link, Outlet } from 'react-router';
-import { IoIosSettings } from "react-icons/io";
-import { MdOutgoingMail, MdOutlinePayments } from "react-icons/md";
+import { IoIosSettings, IoMdAnalytics } from "react-icons/io";
+import { MdManageAccounts, MdOutgoingMail, MdOutlineManageHistory, MdOutlinePayments } from "react-icons/md";
 import { VscGitStashApply } from "react-icons/vsc";
 import { RiFolderHistoryLine } from "react-icons/ri";
 import Logo from '../../../Components/Logo/Logo';
@@ -114,7 +114,22 @@ if (roleLoading) {
     
     </>
    )}
-
+{role === 'admin' && (
+      <li>
+                            <Link to="/dashboard/user-management" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="User Management">
+                                <MdManageAccounts />
+                                <span className="is-drawer-close:hidden">User Management</span>
+                            </Link>
+                            <Link to="/dashboard/tuition-management" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Tuition Management">
+                                <MdOutlineManageHistory/>
+                                <span className="is-drawer-close:hidden">Tuition Management</span>
+                            </Link>
+                            <Link to="/dashboard/report-analytics" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Reports & Analytics">
+                               <IoMdAnalytics />
+                                <span className="is-drawer-close:hidden">Reports & Analytics</span>
+                            </Link>
+                        </li>
+)}
                         {/* Settings */}
                         <li>
                             <Link to="/dashboard/profile-settings" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
