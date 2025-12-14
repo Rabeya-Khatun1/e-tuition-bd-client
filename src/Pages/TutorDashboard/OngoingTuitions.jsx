@@ -8,7 +8,7 @@ const OngoingTuitions = () => {
   const { data: ongoingTuitions = [], isLoading } = useQuery({
     queryKey: ['ongoingTuitions'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/approvedTuitions/approved');
+      const res = await axiosSecure.get('/approvedApplications/approved');
       return res.data;
     }
   });
@@ -36,14 +36,14 @@ const OngoingTuitions = () => {
   {Array.isArray(ongoingTuitions) ? ongoingTuitions.map((tuition, index) => (
     <tr key={tuition._id}>
       <th>{index + 1}</th>
-      <td>{tuition.studentName}</td>
-      <td>{tuition.subject}</td>
-      <td>{tuition.class}</td>
-      <td>{tuition.days}</td>
-      <td>{tuition.time}</td>
-      <td>{tuition.location}</td>
+      <td>{tuition.tuitionPostName}</td>
+      <td>{tuition.tuitionPostSubject}</td>
+      <td>{tuition.tuitionPostClass}</td>
+      <td>{tuition.tuitionPostDays}</td>
+      <td>{tuition.tuitionPostTime}</td>
+      <td>{tuition.tutionPostLocation}</td>
       <td>{tuition.trackingId}</td>
-      <td>{tuition.paymentStatus}</td>
+      <td>{tuition.tuitionPostPaymentStatus}</td>
     </tr>
   )) : <tr><td colSpan="9">No ongoing tuitions found</td></tr>}
 </tbody>

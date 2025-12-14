@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaUsers, FaBook, FaDollarSign } from "react-icons/fa";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import StatCard from "./StatCard";
+import AdminStatCard from "./AdminStatCard";
 
 const AdminDashboard = () => {
 
@@ -66,7 +66,7 @@ setStats(res.data);
   
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         
-        <StatCard
+        <AdminStatCard
           icon={FaUsers}
           title="Total Users"
           value={stats.totalUsers}
@@ -77,7 +77,7 @@ setStats(res.data);
           bgColor="bg-indigo-600 shadow-indigo-300/50"
         />
 
-        <StatCard
+        <AdminStatCard
           icon={FaBook}
           title="Total Tuitions"
           value={stats.totalTuitions}
@@ -89,7 +89,7 @@ setStats(res.data);
           bgColor="bg-green-600 shadow-green-300/50"
         />
 
-        <StatCard
+        <AdminStatCard
           icon={FaDollarSign}
           title="Total Earnings"
           value={formatCurrency(stats.totalEarnings)}
@@ -98,7 +98,7 @@ setStats(res.data);
         />
 
      
-        <StatCard
+        <AdminStatCard
           icon={FaBook}
           title="New Requests"
           value={stats.pendingTuitions} 

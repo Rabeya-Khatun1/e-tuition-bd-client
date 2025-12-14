@@ -1,54 +1,49 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import useAuth from './useAuth'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-const useAxiosSecure = () => {
+import useAuth from './useAuth';
 
-const navigate = useNavigate();
-    const {user, signOutUser} = useAuth()
 const axiosSecure = axios.create({
-    baseURL:'http://localhost:3000'
-})
+  baseURL: 'http://localhost:3000',
+});
 
-useEffect( ()=>{
+const useAxiosSecure = () => {
+  const { user, loading, signOutUser } = useAuth();
+  const navigate = useNavigate();
 
-    // request 
-const requestInterceptors = axiosSecure.interceptors.request.use(config => {
+  useEffect(() => {
+    if (loading) return;
 
-    config.headers.Authorization=`Bearer ${user?.accessToken}`
+    const requestInterceptor = axiosSecure.interceptors.request.use(
+      async (config) => {
+        if (user) {
+          const token = await user.getIdToken(true); 
+          config.headers.authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
 
+    const responseInterceptor = axiosSecure.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          signOutUser();
+          navigate('/login');
+        }
+        return Promise.reject(error);
+      }
+    );
 
-     return config;
+    return () => {
+      axiosSecure.interceptors.request.eject(requestInterceptor);
+      axiosSecure.interceptors.response.eject(responseInterceptor);
+    };
+  }, [user, loading, navigate, signOutUser]);
 
-}
-   
-)
-// response 
-const responseInterceptors = axiosSecure.interceptors.response.use((response) =>{
-    return response ;
-}, error => {
-    const statusCode = error?.response.status;
-if(statusCode === 401 || statusCode === 403){
-signOutUser()
-.then(()=>{
-navigate('/login')
-}
-    
-)
-}
-
-})
-
-return ()=>{
-    axiosSecure.interceptors.request.eject(requestInterceptors)
-axiosSecure.interceptors.response.eject(responseInterceptors)
-}
-
-
-},[user, signOutUser, navigate,axiosSecure])
-
-return axiosSecure;
+  return axiosSecure;
 };
 
 export default useAxiosSecure;

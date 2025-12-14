@@ -1,76 +1,131 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { FaBookReader, FaMoneyBillWave, FaChalkboardTeacher } from 'react-icons/fa'; 
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useAuth from '../../Hooks/useAuth';
+import TutorStatCard from './TutorStatCard';
 
 const TutorDashboard = () => {
   const axiosSecure = useAxiosSecure();
-const {user} = useAuth();
-  // Approved Tuitions
-  const { data: approvedTuitions = [] } = useQuery({
-    queryKey: ['approvedTuitions'],
+  const { user, loading } = useAuth(); 
+
+
+  const { data: approvedTuitions = [], isLoading: isLoadingApproved } = useQuery({
+    queryKey: ['approvedTuitions', user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get('/approvedTuitions/approved');
+    
+      const res = await axiosSecure.get(`/approvedApplications/approved?email=${user?.email}`);
       return res.data;
     },
+    enabled: !!user?.email && !loading, 
   });
 
-  // Earnings
-  const { data: earningsData = 0 } = useQuery({
-    queryKey: ['earnings'],
+
+  const { data: appliedTuitions = [], isLoading: isLoadingApplied } = useQuery({
+    queryKey: ['appliedTuitions', user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get('/revenue');
+      
+      const res = await axiosSecure.get(`/applications`);
+      return res.data;
+    },
+    enabled: !!user?.email && !loading,
+  });
+
+ 
+  const { data: earningsData = 0, isLoading: isLoadingEarnings } = useQuery({
+    queryKey: ['earnings', user?.email],
+    queryFn: async () => {
+     
+      const res = await axiosSecure.get(`/revenue`);
       return res.data.totalEarnings;
     },
+    enabled: !!user?.email && !loading,
   });
 
   // Recent Activities
-  const { data: activities = [] } = useQuery({
-    queryKey: ['activities'],
+  const { data: activities = [], isLoading: isLoadingActivities } = useQuery({
+    queryKey: ['activities', user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/trackings/tutor?email=${user?.email}`);
       return res.data;
     },
+    enabled: !!user?.email && !loading,
+    staleTime: 60000,
   });
 
+ 
+
+
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Tutor Dashboard</h1>
+    <div className="p-4 md:p-8 space-y-8 bg-gray-50 min-h-screen">
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="card bg-base-100 shadow p-4">
-          <h2 className="text-sm">Approved Tuitions</h2>
-          <p className="text-3xl font-bold">{approvedTuitions.length}</p>
-        </div>
-
-        <div className="card bg-base-100 shadow p-4">
-          <h2 className="text-sm">Completed Tuitions</h2>
-          <p className="text-3xl font-bold">
-            {approvedTuitions.filter(t => t.paymentStatus === 'paid').length}
-          </p>
-        </div>
-
-        <div className="card bg-base-100 shadow p-4">
-          <h2 className="text-sm">Total Earnings</h2>
-          <p className="text-3xl font-bold">${earningsData}</p>
-        </div>
+      <div className="border-b pb-4">
+        <h1 className="text-3xl font-extrabold text-primary flex items-center">
+          <FaChalkboardTeacher className="mr-3" />
+          Tutor Dashboard Overview
+        </h1>
+        <p className="text-gray-500 mt-1">Welcome back, **{user?.displayName || 'Tutor'}**! Here's a summary of your activities.</p>
       </div>
 
-      {/* Recent Activity */}
-      <div className="card bg-base-100 shadow p-4">
-        <h2 className="text-lg font-semibold mb-3">Recent Activities</h2>
+      {/* Stats Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <TutorStatCard
+          title="Approved Tuitions"
+          value={approvedTuitions.length}
+          icon={<FaBookReader className="text-green-500" />}
+          color="border-green-500"
+          isLoading={isLoadingApproved}
+        />
+        <TutorStatCard
+          title="Applied Tuitions"
+          value={appliedTuitions.length}
+          icon={<FaChalkboardTeacher className="text-yellow-500" />}
+          color="border-yellow-500"
+          isLoading={isLoadingApplied}
+        />
+        <TutorStatCard
+          title="Total Earnings"
+          value={earningsData}
+          icon={<FaMoneyBillWave className="text-blue-500" />}
+          color="border-blue-500"
+          isLoading={isLoadingEarnings}
+        />
+      </div>
 
-        <ul className="space-y-2">
-          {activities.map(log => (
-            <li key={log._id} className="flex justify-between text-sm">
-              <span>{log.details}</span>
-              <span className="text-gray-500">
-                {new Date(log.createdAt).toLocaleDateString()}
-              </span>
-            </li>
-          ))}
-        </ul>
+     
+      <div className="card bg-white shadow-xl">
+        <div className="card-body p-6">
+          <h2 className="text-2xl font-bold text-secondary mb-4 border-b pb-2">
+            Recent Activities
+          </h2>
+
+          {isLoadingActivities ? (
+             <div className="flex justify-center items-center h-48">
+                <span className="loading loading-spinner loading-lg text-secondary"></span>
+             </div>
+          ) : activities.length > 0 ? (
+            <ul className="space-y-3 divide-y divide-gray-200">
+              {activities.map(log => ( 
+                <li key={log._id} className="flex justify-between items-center pt-3 hover:bg-gray-50 p-2 rounded-lg transition duration-200">
+                  <span className="text-base text-gray-700 font-medium">
+                    {log.details}
+                  </span>
+                  <span className="badge badge-outline text-gray-500 text-xs">
+                    {new Date(log.createdAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="text-center py-6 text-gray-500">
+              <p>No recent activities found.</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

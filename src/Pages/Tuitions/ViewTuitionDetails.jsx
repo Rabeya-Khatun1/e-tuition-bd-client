@@ -54,7 +54,7 @@ const TuitionDetailsPage = () => {
       ...data,
       email: user?.email,
       profilePhoto: user?.photoURL,
-
+      trackingId:tuition.trackingId,
       tuitionPostId: tuition?._id,
       tuitionPostSubject: tuition?.subject,
       tuitionPostClass: tuition?.class,
