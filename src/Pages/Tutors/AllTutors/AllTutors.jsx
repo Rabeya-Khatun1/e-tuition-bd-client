@@ -57,9 +57,7 @@ const AllTutors = () => {
               {tutor.rating && <p><span className="font-medium">Rating:</span> {tutor.rating}</p>}
             </div>
 
-            <button className="mt-5 py-2 px-5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold text-sm shadow-sm hover:shadow-lg hover:opacity-90 transition-all">
-              View Profile
-            </button>
+    
           </motion.div>
         ))}
       </div>

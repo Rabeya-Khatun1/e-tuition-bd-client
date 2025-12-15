@@ -28,6 +28,8 @@ import AdminRoutes from "./AdminRoutes";
 import UserManagement from "../Pages/AdminDashboard/UserManagement";
 import TuitionManagement from "../Pages/AdminDashboard/TuitionManagement";
 import ReportAnalytics from "../Pages/AdminDashboard/ReportAnalytics";
+import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ export const router = createBrowserRouter([
         {
             path:'/beATutor',
             Component:BeATutor,
+        },
+        {
+            path:'/about',
+            Component:About,
+        },
+        {
+            path:'/contact',
+            Component:Contact,
         },
         {
             path:'/viewTuitionDetails/:id',
@@ -122,7 +132,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'user-management',
-        element:<UserManagement></UserManagement>
+        element:<AdminRoutes><UserManagement></UserManagement></AdminRoutes>
       },
       {
         path:'tuition-management',

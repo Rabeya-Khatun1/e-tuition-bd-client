@@ -4,8 +4,22 @@ import { LiaCalculatorSolid } from "react-icons/lia";
 import { TbAlphabetBangla } from "react-icons/tb";
 import { PiAtomBold } from "react-icons/pi";
 import { FaFont } from "react-icons/fa";
+import { useSearchParams, useNavigate } from 'react-router';
+import { useState } from 'react';
+
 
 const ModernEducation = () => {
+
+
+const [searchParams, setSearchParams] = useSearchParams();
+const navigate = useNavigate();
+
+const [subject, setSubject] = useState(searchParams.get('subject') || '');
+const [location, setLocation] = useState(searchParams.get('location') || '');
+
+
+
+
   return (
     <div className="relative min-h-screen flex items-center justify-center px-6 bg-linear-to-br from-indigo-100 via-purple-100 to-white overflow-hidden">
 
@@ -73,14 +87,33 @@ const ModernEducation = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex justify-center"
         >
-          <div className="w-full md:w-3/4 bg-white/90 backdrop-blur-lg shadow-xl border border-gray-200 rounded-2xl p-4 flex items-center gap-3">
-            <input
-              type="text"
-              placeholder="Search for tutors, subjects, classes..."
-              className="input input-bordered w-full"
-            />
-            <button className="btn btn-primary px-6">Search</button>
-          </div>
+         <div className="w-full md:w-3/4 bg-white/90 backdrop-blur-lg shadow-xl border border-gray-200 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-3">
+  <input
+    type="text"
+    placeholder="Search by subject..."
+    value={subject}
+    onChange={(e) => setSubject(e.target.value)}
+    className="input input-bordered w-full mb-2 md:mb-0"
+  />
+  <input
+    type="text"
+    placeholder="Search by location..."
+    value={location}
+    onChange={(e) => setLocation(e.target.value)}
+    className="input input-bordered w-full mb-2 md:mb-0"
+  />
+  <button
+    className="btn btn-primary px-6"
+    onClick={() => {
+      // Set search params and navigate to Tuitions page
+      setSearchParams({ subject, location, page: 1 });
+      navigate(`/tuitions?subject=${subject}&location=${location}&page=1`);
+    }}
+  >
+    Search
+  </button>
+</div>
+
         </motion.div>
 
       </div>
