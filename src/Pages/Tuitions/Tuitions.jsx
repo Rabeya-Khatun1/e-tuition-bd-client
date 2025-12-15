@@ -6,11 +6,12 @@ import { IoLocation } from 'react-icons/io5';
 import { FaRegClock } from 'react-icons/fa';
 import { Link, useSearchParams } from 'react-router';
 
-
 const Tuitions = () => {
   const axios = useAxios();
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const subjects = ["All", "Math", "English", "Bangla", "Physics", "Chemistry"];
 
   const subject = searchParams.get("subject") || "";
   const location = searchParams.get("location") || "";
@@ -18,7 +19,6 @@ const Tuitions = () => {
 
   const [page, setPage] = useState(pageFromURL);
 
- 
   const { data = {} } = useQuery({
     queryKey: ['tuitions', page, subject, location],
     queryFn: async () => {
@@ -32,14 +32,13 @@ const Tuitions = () => {
   const tuitions = data.tuitions || [];
   const totalPages = data.totalPages || 1;
 
- 
   const updateSearch = (key, value) => {
     const newParams = {
       subject,
       location,
       page: 1
     };
-    newParams[key] = value;
+    newParams[key] = value === "All" ? "" : value; 
     setSearchParams(newParams);
     setPage(1);
   };
@@ -50,7 +49,22 @@ const Tuitions = () => {
         Explore Available Tuitions
       </h2>
 
-      {/* Search Inputs */}
+
+      <div className="flex justify-center gap-4 mb-6 flex-wrap">
+        {subjects.map((subj) => (
+          <button
+            key={subj}
+            onClick={() => updateSearch("subject", subj)}
+            className={`px-4 py-2 rounded-full text-sm font-medium 
+              ${subject === (subj === "All" ? "" : subj) ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"} 
+              hover:bg-blue-400 hover:text-white transition-colors`}
+          >
+            {subj}
+          </button>
+        ))}
+      </div>
+
+
       <div className="flex flex-col md:flex-row gap-4 mb-10 justify-center">
         <input
           type="text"
@@ -69,7 +83,7 @@ const Tuitions = () => {
         />
       </div>
 
-      {/* Tuition Cards */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
         {tuitions.map((tuition, index) => (
           <motion.div
@@ -111,7 +125,6 @@ const Tuitions = () => {
         ))}
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-center items-center gap-6 my-10">
         <button
           onClick={() => {

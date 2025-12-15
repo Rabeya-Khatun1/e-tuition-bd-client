@@ -13,13 +13,14 @@ const TuitionManagement = () => {
   const { data = {}, refetch } = useQuery({
     queryKey: ["admin-tuitions", page],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/tuitions?page=${page}`);
+      const res = await axiosSecure.get(`/tuitions/pending?page=${page}`);
       return res.data;
     },
   });
 
   const tuitions = data.tuitions || [];
   const totalPages = data.totalPages || 1;
+const pendingTuitions = tuitions.filter(t => t.status === 'pending');
 
   const handleChecklistSubmit = async (id, checks) => {
     const res = await axiosSecure.post(`/tuition/review/${id}`, checks);
@@ -40,7 +41,7 @@ const TuitionManagement = () => {
     });
 
     if (confirmResult.isConfirmed) {
-      await axiosSecure.patch(`/tuitions/${action}/${id}`);
+      await axiosSecure.patch(`/tuitions/${action}/${id}`, );
       Swal.fire("Success!", `Tuition has been ${action}d.`, "success");
       refetch();
     }
@@ -61,7 +62,7 @@ const TuitionManagement = () => {
           <p className="text-gray-500 col-span-full">No tuition requests yet.</p>
         )}
 
-        {tuitions.map((t) => (
+        {pendingTuitions.map((t) => (
           <div
             key={t._id}
             className="border rounded-xl shadow-lg p-5 hover:shadow-2xl transition duration-300 bg-linear-to-br from-green-500 to-red-300"

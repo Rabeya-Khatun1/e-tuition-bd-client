@@ -10,15 +10,14 @@ const MyTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: tuitions = [], refetch} = useQuery({
+  const { data, refetch} = useQuery({
     queryKey: ['tuitions', user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/tuitions?email=${user?.email}`);
-      return res.data;
+      const res = await axiosSecure.get(`/tuitions/my-tuitions?email=${user?.email}`);
+      return res.data.tuitions;
     }
   });
-
-const paidTuitions = tuitions.filter(tuition => tuition.paymentStatus !== 'paid')
+  const allTuitions = data || []
 
 const handleStatusBadge = (status) => {
   const s = status.toLowerCase();
@@ -85,7 +84,7 @@ const handleRemoveTuition = (id)=>{
 
   return (
     <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center">My Tuitions</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">My Tuitions:{allTuitions.length}</h2>
       <table className="table table-zebra w-full">
         <thead>
           <tr>
@@ -104,7 +103,7 @@ const handleRemoveTuition = (id)=>{
           </tr>
         </thead>
         <tbody>
-          {paidTuitions.map((tuition, index) => (
+          {allTuitions.map((tuition, index) => (
             <tr key={tuition._id}>
               <th>{index + 1}</th>
               <td>{tuition.name}</td>
@@ -134,7 +133,7 @@ const handleRemoveTuition = (id)=>{
           ))}
         </tbody>
       </table>
-      {tuitions.length === 0 && (
+      {allTuitions.length === 0 && (
         <p className="text-center mt-4 text-gray-500">No tuitions found.</p>
       )}
     </div>

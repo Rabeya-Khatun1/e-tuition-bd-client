@@ -17,7 +17,11 @@ const navigate = useNavigate();
 const [subject, setSubject] = useState(searchParams.get('subject') || '');
 const [location, setLocation] = useState(searchParams.get('location') || '');
 
-
+const handleSubjectClick = (subjectName)=>{
+  setSubject(subjectName)
+  setSearchParams({subject:subjectName, location, page:1})
+  navigate(`/tuitions?subject=${subjectName}&location=${location}&page=1`)
+}
 
 
   return (
@@ -29,6 +33,7 @@ const [location, setLocation] = useState(searchParams.get('location') || '');
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.3, repeat: Infinity, repeatType: "reverse" }}
         className="flex  absolute top-24 left-10 bg-linear-to-br from-green-500 to-red-300 backdrop-blur-md shadow-md px-4 py-1 rounded-full text-sm font-semibold"
+      onClick={()=>handleSubjectClick('Math')}
       >
      <LiaCalculatorSolid className="m-1"/> Math
       </motion.div>
@@ -37,6 +42,7 @@ const [location, setLocation] = useState(searchParams.get('location') || '');
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
         className="flex  absolute top-30 left-65 bg-linear-to-br from-green-500 to-red-300 backdrop-blur-md shadow-md px-4 py-1 rounded-full text-sm font-semibold"
+      onClick={()=>handleSubjectClick('English')}
       >
      <FaFont className="m-1"/>  English
       </motion.div>
@@ -46,6 +52,7 @@ const [location, setLocation] = useState(searchParams.get('location') || '');
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.4, repeat: Infinity, repeatType: "reverse" }}
         className="flex  absolute top-48 right-16 bg-linear-to-br from-green-500 to-red-300 backdrop-blur-md shadow-md px-4 py-1 rounded-full text-sm font-semibold"
+      onClick={()=>handleSubjectClick('Bangla')}
       >
        <TbAlphabetBangla className="m-1" /> Bangla
       </motion.div>
@@ -55,6 +62,7 @@ const [location, setLocation] = useState(searchParams.get('location') || '');
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
         className="flex  absolute bottom-24 left-1/3 bg-linear-to-br from-green-500 to-red-300 backdrop-blur-md shadow-md px-4 py-1 rounded-full text-sm font-semibold"
+      onClick={()=>handleSubjectClick('Physics')}
       >
         <PiAtomBold className="m-1" />Physics
       </motion.div>
@@ -67,6 +75,7 @@ const [location, setLocation] = useState(searchParams.get('location') || '');
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
           className="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight"
+        
         >
           Your Trusted <span className="text-indigo-600">Tuition Companion</span>
         </motion.h1>

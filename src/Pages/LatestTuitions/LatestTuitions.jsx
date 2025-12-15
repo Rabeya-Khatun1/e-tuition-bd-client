@@ -13,14 +13,15 @@ const LatestTuition = () => {
 
 const axios = useAxios();
 
-const {data:tuitions=[]} = useQuery({
+const {data} = useQuery({
     queryKey: ['tuitions',],
     queryFn: async()=>{
 const res = await axios.get('/tuitions?limit=8')
-return res.data
+return res.data.tuitions;
     }
 })
 
+const tuitions = data || []
 
   return (
    <div className="px-6 py-20 bg-linear-to-br from-indigo-100 via-purple-100 to-white">
