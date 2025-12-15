@@ -18,19 +18,30 @@ const Tuitions = () => {
   const pageFromURL = Number(searchParams.get("page")) || 1;
 
   const [page, setPage] = useState(pageFromURL);
-
-  const { data = {} } = useQuery({
-    queryKey: ['tuitions', page, subject, location],
+  const [sortBy, setSortBy] = useState("");
+ const { data = {} } = useQuery({
+    queryKey: ['tuitions', page, subject, location, sortBy],
     queryFn: async () => {
-      const res = await axios.get(
-        `/tuitions?page=${page}&subject=${subject}&location=${location}`
-      );
-      return res.data;
+        const res = await axios.get(
+            `/tuitions?page=${page}&subject=${subject}&location=${location}&sortBy=${sortBy}`
+        );
+        return res.data;
     }
-  });
+});
+
 
   const tuitions = data.tuitions || [];
   const totalPages = data.totalPages || 1;
+
+
+
+const updateSort = (value) => {
+    setSortBy(value);
+    setPage(1);
+    setSearchParams({ subject, location, page: 1, sortBy: value });
+};
+
+
 
   const updateSearch = (key, value) => {
     const newParams = {
@@ -48,6 +59,20 @@ const Tuitions = () => {
       <h2 className="text-3xl md:text-4xl font-bold text-center my-12 text-gray-500">
         Explore Available Tuitions
       </h2>
+
+<div className="flex justify-center gap-4 mb-6">
+    <select
+        value={sortBy}
+        onChange={(e) => updateSort(e.target.value)}
+        className="border border-gray-300 rounded-lg px-4 py-2"
+    >
+        <option value="">Sort by</option>
+        <option value="date_desc">Newest First</option>
+        <option value="date_asc">Oldest First</option>
+        <option value="budget_asc">Budget Low → High</option>
+        <option value="budget_desc">Budget High → Low</option>
+    </select>
+</div>
 
 
       <div className="flex justify-center gap-4 mb-6 flex-wrap">

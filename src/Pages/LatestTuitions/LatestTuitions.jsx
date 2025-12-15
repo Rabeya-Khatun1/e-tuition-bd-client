@@ -8,6 +8,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { Link } from "react-router";
 
 const LatestTuition = () => {
 
@@ -48,10 +49,10 @@ const tuitions = data || []
     }}
     className="mySwiper"
   >
-    {tuitions.map((item, index) => (
+    {tuitions.map((tuition, index) => (
       <SwiperSlide key={index}>
          <motion.div
-            key={item.id}
+            key={tuition.id}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -60,29 +61,31 @@ const tuitions = data || []
           >
             <div>
               <h3 className="font-semibold text-xl text-gray-800 mb-4">
-                {item.subject}
+                {tuition.subject}
               </h3>
 
-              <p className="text-gray-600 text-sm mb-2 flex items-center">
-                <IoLocation className="mr-2 text-blue-400" /> {item.location}
+              <p className="text-gray-600 text-sm mb-2 flex tuitions-center">
+                <IoLocation className="mr-2 text-blue-400" /> {tuition.location}
               </p>
-              <p className="text-gray-600 text-sm mb-3 flex items-center">
-                <FaRegClock className="mr-2 text-blue-400" /> {item.timing}
+              <p className="text-gray-600 text-sm mb-3 flex tuitions-center">
+                <FaRegClock className="mr-2 text-blue-400" /> {tuition.timing}
               </p>
 
               <div className="bg-purple-100 text-blue-700 py-2 px-3 rounded-full inline-block mb-3 text-sm font-medium">
-                Budget: {item.budget}
+                Budget: {tuition.budget}
               </div>
             </div>
 
             <div>
               <p className="text-xs text-gray-400 mb-3">
-                Posted on: {new Date(item.date).toLocaleDateString()}
+                Posted on: {new Date(tuition.date).toLocaleDateString()}
               </p>
 
-              <button className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors">
-                View Details
-              </button>
+              <Link to={`/viewTuitionDetails/${tuition._id}`}>
+                <button className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors">
+                  View Details
+                </button>
+              </Link>
             </div>
           </motion.div>
       </SwiperSlide>

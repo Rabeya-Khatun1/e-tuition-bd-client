@@ -3,17 +3,22 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaCheck, FaEdit, FaHourglassHalf, FaTimes, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import useAuth from '../../Hooks/useAuth';
 
 const AppliedTutors = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: appliedTutors = [], refetch } = useQuery({
-        queryKey: ['appliedTutors'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/applications');
-            return res?.data;
-        }
-    });
+    const {user} =useAuth()
+
+const { data: verifiedTutors = [] , refetch} = useQuery({
+  queryKey: ['verifiedTutors'],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/applications/verified?email=${user?.email}`);
+    return res.data;
+  }
+});
+
+console.log('verifiedTutors', verifiedTutors)
 
     const handleStatusBadge = (status) => {
         status = status.toLowerCase();
@@ -60,7 +65,7 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
           axiosSecure.patch(`/applications/reject/${appliedTutorId}`)
    .then(res=> {
 
-    const remainingAppliedTutors = appliedTutors.filter(appliedTutor => appliedTutor._id !== appliedTutorId)
+    // const remainingAppliedTutors = appliedTutors.filter(appliedTutor => appliedTutor._id !== appliedTutorId)
      if(res.data.modifiedCount){
       Swal.fire({
        title: "Rejected!",
@@ -132,7 +137,7 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
                     </tr>
                 </thead>
                 <tbody>
-                    {appliedTutors.map((appliedTutor, index) => (
+                    {verifiedTutors.map((appliedTutor, index) => (
                         <tr key={appliedTutor._id}>
                             <th>{index + 1}</th>
                             <td>{appliedTutor.name}</td>
@@ -162,7 +167,7 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
                     ))}
                 </tbody>
             </table>
-            {appliedTutors.length === 0 && (
+            {verifiedTutors.length === 0 && (
                 <p className="text-center mt-4 text-gray-500">No applied tutors found.</p>
             )}
         </div>

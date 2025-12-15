@@ -101,9 +101,7 @@ const LatestTutors = () => {
           {tutor.rating && <p><span className="font-medium">Rating:</span> {tutor.rating} ⭐</p>}
         </div>
 
-        <button className="mt-4 py-2 px-4 rounded-xl bg-blue-400 hover:bg-blue-500 text-white text-sm font-semibold transition-colors">
-          View Profile
-        </button>
+        
       </motion.div>
     </SwiperSlide>
   ))}

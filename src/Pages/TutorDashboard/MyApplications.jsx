@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { FaCheck, FaEdit, FaHourglassHalf, FaTimes, FaTrash } from 'react-icons/fa';
 import { toast } from "react-toastify";
+import useAuth from '../../Hooks/useAuth';
+// import useJwtSecure from '../../Hooks/useAxiosJWTSecure';
 
 const MyApplications = () => {
 
+  // const axiosJWTSecure = useJwtSecure()
+  const {user} = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedApp, setSelectedApp] = useState(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,10 +17,16 @@ const MyApplications = () => {
   const { data: applications = [], refetch } = useQuery({
     queryKey: ['myApplications'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/applications');
+      const res = await axiosSecure.get(`/applications?email=${user?.email}`);
       return res.data;
     }
   });
+
+  // if(user?.email){
+  //   axiosSecure.post('/getToken',{email:user?.email} )
+   
+  // }
+
 
   const handleStatusBadge = (status) => {
     const s = status.toLowerCase();

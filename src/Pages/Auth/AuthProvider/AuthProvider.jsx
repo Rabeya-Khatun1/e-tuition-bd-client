@@ -3,10 +3,12 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 
 import { auth } from '../../../../firebase.init';
 import { AuthContext } from '../AuthContext/AuthContext';
+// import useAxios from '../../../Hooks/useAxios';
 
 
 const AuthProvider = ({children}) => {
 
+    // const axios = useAxios();
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
 
@@ -41,7 +43,21 @@ const signOutUser = ()=>{
 useEffect( ()=>{
 
 const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-setUser(currentUser)
+setUser(currentUser);
+
+// if(currentUser){
+//     const loggedUser = {email:currentUser?.email}
+
+// axios.post('/getToken', loggedUser)
+// .then(res => {
+//     console.log('res.data is', res.data)
+//     localStorage.setItem('token', res.data.token)
+// })
+// .catch(err=> console.log(err))
+// }
+// else{
+//     localStorage.removeItem('token')
+// }
 setLoading(false)
 })
 

@@ -5,8 +5,10 @@ import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+// import useJwtSecure from '../../Hooks/useAxiosJWTSecure';
 
 const MyTuitions = () => {
+  // const axiosJWTSecure = useJwtSecure();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -17,6 +19,12 @@ const MyTuitions = () => {
       return res.data.tuitions;
     }
   });
+
+//   if(user?.email){
+// axiosJWTSecure.post('/getToken',{ email: user.email })
+
+//   }
+
   const allTuitions = data || []
 
 const handleStatusBadge = (status) => {

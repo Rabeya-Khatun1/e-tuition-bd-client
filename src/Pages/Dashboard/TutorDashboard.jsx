@@ -11,7 +11,7 @@ const TutorDashboard = () => {
 
 
   const { data: approvedTuitions = [], isLoading: isLoadingApproved } = useQuery({
-    queryKey: ['approvedTuitions', user?.email],
+    queryKey: ['approvedApplications', user?.email],
     queryFn: async () => {
     
       const res = await axiosSecure.get(`/approvedApplications/approved?email=${user?.email}`);

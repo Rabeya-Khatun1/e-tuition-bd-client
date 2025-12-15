@@ -124,6 +124,7 @@ if (roleLoading) {
                                 <MdOutlineManageHistory/>
                                 <span className="is-drawer-close:hidden">Tuition Management</span>
                             </Link>
+                            
                             <Link to="/dashboard/report-analytics" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Reports & Analytics">
                                <IoMdAnalytics />
                                 <span className="is-drawer-close:hidden">Reports & Analytics</span>
