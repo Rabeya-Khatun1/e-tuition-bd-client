@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "source": "/",
+      "destination": "/"
+    },
+    {
+      "source": "/test",
+      "destination": "/dashboard"
+    }
+  ]
+}
