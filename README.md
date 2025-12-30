@@ -31,7 +31,7 @@ This project was developed as part of a **job task assessment**, focusing on rea
 ---
 
 ## Screenshot
-![Screenshot of e-Tuition BD](https://i.ibb.co.com/B22yJY1g/Screenshot-2025-12-31-040238.png)
+![Screenshot of e-Tuition BD](https://i.ibb.co.com/qL6QhwD9/Screenshot-2025-12-31-040723.png)
 
 
 ##  Key Features
