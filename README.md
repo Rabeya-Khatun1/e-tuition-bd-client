@@ -7,6 +7,8 @@
 This project was developed as part of a **job task assessment**, focusing on real-world workflows, clean UI/UX, role-based authentication, and scalable backend architecture.
 
 ---
+![Screenshot of e-Tuition BD](https://i.ibb.co.com/B22yJY1g/Screenshot-2025-12-31-040238.png)
+
 
 ##  Live Website
 
@@ -27,6 +29,10 @@ This project was developed as part of a **job task assessment**, focusing on rea
 6. **Admin** monitors users, tuitions, and financial activities.
 
 ---
+
+## Screenshot
+![Screenshot of e-Tuition BD](https://i.ibb.co.com/B22yJY1g/Screenshot-2025-12-31-040238.png)
+
 
 ##  Key Features
 
