@@ -4,8 +4,8 @@ import Logo from '../../Components/Logo/Logo'
 
 const Footer = () => {
   return (
-<div className='bg-neutral text-neutral-content p-5'>
-      <footer className="bg-neutral flex flex-col justify-start items-start text-neutral-content p-10">
+<div className=' text-neutral-content'>
+      <footer className=" flex flex-col justify-start items-start text-neutral-content p-5 ml-20">
       <div className='my-10'>
         <Logo></Logo>
       </div>
@@ -26,10 +26,19 @@ const Footer = () => {
         <div>
           <h6 className="footer-title text-white font-bold mb-2">Quick Links</h6>
           <ul className="space-y-1">
-            <li><a href="#" className="link link-hover">Home</a></li>
-            <li><a href="#" className="link link-hover">Features</a></li>
-            <li><a href="#" className="link link-hover">Pricing</a></li>
-            <li><a href="#" className="link link-hover">FAQ</a></li>
+            <li><a href="/" className="link link-hover">Home</a></li>
+            <li><a href="/features" className="link link-hover">Features</a></li>
+            <li><a href="/faq" className="link link-hover">FAQ</a></li>
+           
+          </ul>
+        </div>
+        <div>
+    
+          <ul className="space-y-1">
+            <li><a href="/about" className="link link-hover">About Us</a></li>
+            <li><a href="/blog" className="link link-hover">Blog</a></li>
+            <li><a href="/privacy-policy" className="link link-hover">Privacy Policy</a></li>
+            <li><a href="/contact" className="link link-hover">Contact</a></li>
            
           </ul>
         </div>
@@ -46,16 +55,16 @@ const Footer = () => {
         <div>
           <h6 className="footer-title text-white font-bold mb-2">Follow Us</h6>
          <div className="flex space-x-3 mt-2">
-  <a href="https://x.com/yourprofile" target="_blank" rel="noopener noreferrer">
+  <a href="https://x.com/prorabeya2008" target="_blank" rel="noopener noreferrer">
     <img className="w-6 h-6" src={twitter} alt="X"/>
   </a>
-  <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/rabeya17/" target="_blank" rel="noopener noreferrer">
     <img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="Facebook"/>
   </a>
-  <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.instagram.com/prorabeya2008/" target="_blank" rel="noopener noreferrer">
     <img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"/>
   </a>
-  <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/in/rabeya123/" target="_blank" rel="noopener noreferrer">
     <img className="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"/>
   </a>
 </div>

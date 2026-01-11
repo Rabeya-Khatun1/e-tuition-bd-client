@@ -79,11 +79,11 @@ const ReportAnalytics = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-3 py-2 text-left text-gray-600">Tracking ID</th>
-                <th className="px-3 py-2 text-left text-gray-600">Student Name</th>
-                <th className="px-3 py-2 text-left text-gray-600">Amount</th>
-                <th className="px-3 py-2 text-left text-gray-600">Status</th>
-                <th className="px-3 py-2 text-left text-gray-600">Paid At</th>
+                <th className="px-3 py-2 text-left ">Tracking ID</th>
+                <th className="px-3 py-2 text-left ">Student Name</th>
+                <th className="px-3 py-2 text-left ">Amount</th>
+                <th className="px-3 py-2 text-left ">Status</th>
+                <th className="px-3 py-2 text-left ">Paid At</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -106,9 +106,9 @@ const ReportAnalytics = () => {
 
 
         <div className="mt-3 flex gap-2 justify-center">
-          <button disabled={page === 1} onClick={() => setPage(page - 1)} className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50">Prev</button>
+          <button disabled={page === 1} onClick={() => setPage(page - 1)} className="btn btn-primary  bg-gray-300  disabled:opacity-50">Prev</button>
           <span className="px-3 py-1">{page} / {totalPages}</span>
-          <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50">Next</button>
+          <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="btn btn-primary bg-gray-300  disabled:opacity-50">Next</button>
         </div>
       </div>
 

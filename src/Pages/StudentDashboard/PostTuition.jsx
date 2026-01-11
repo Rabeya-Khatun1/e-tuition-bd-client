@@ -42,7 +42,7 @@ navigate('/dashboard/myTuitions')
 
 
     return (
-        <div className="max-w-2xl mx-auto p-10 bg-linear-to-r from-indigo-100 to-purple-100 rounded-3xl shadow-xl mt-10 border border-gray-200">
+        <div className="max-w-2xl mx-auto p-10 bg-linear-to-r from-indigo-100 to-purple-100 rounded-2xl shadow-xl mt-10 border border-gray-200">
           <title>eTuitionBd-Dashboard-PostTuitions</title>
             <h2 className="text-4xl font-extrabold mb-8 text-center text-purple-700">Post a Tuition</h2>
             <p className='text-center'>Quickly post your tuition requirements and find the perfect tutor! Fill in the class, subjects, preferred days, timing, location, and expected salary. Our easy-to-use form ensures your tuition post reaches qualified tutors fast, helping you start learning without any hassle.</p>
@@ -57,7 +57,7 @@ navigate('/dashboard/myTuitions')
                         {...register('name',{required:true})}
                         placeholder="Enter Your Name"
                         value={user?.displayName}
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.email && <p className='text-red'>Name is required</p>}
                 </div>
@@ -69,7 +69,7 @@ navigate('/dashboard/myTuitions')
                         {...register('email',{required:true})}
                         placeholder="Enter Your Email"
                         value={user?.email}
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.name && <p className='text-red'>Email is required</p>}
                 </div>
@@ -82,7 +82,7 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('class',{required:true})}
                         placeholder="Class"
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.class && <p className='text-red'>email is required</p>}
                 </div>
@@ -94,7 +94,7 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('subject',{required:true})}
                         placeholder="Math, English..."
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.subject && <p className='text-red'>Subject is required</p>}
                 </div>
@@ -106,7 +106,7 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('location',{required:true})}
                         placeholder="Mirpur 10 / Online"
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.subject && <p className='text-red'>Location is required</p>}
                 </div>
@@ -118,7 +118,7 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('days',{required:true})}
                         placeholder="3 days / 5 days"
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.location && <p className='text-red'>Day information is required</p>}
                 </div>
@@ -130,7 +130,7 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('time',{required:true})}
                         placeholder="Evening / 6-8 PM"
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.time && <p className='text-red'>Time for tuition is required</p>}
                 </div>
@@ -142,7 +142,7 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('salary',{required:true})}
                         placeholder="3000–5000 BDT"
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.salary && <p className='text-red'>Salary is required</p>}
                 </div>
@@ -153,14 +153,14 @@ navigate('/dashboard/myTuitions')
                         type="number"
                         {...register('number',{required:true})}
                         placeholder="01********"
-                        className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
+                        className="input input-bordered input-lg w-full rounded-2xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
                     {errors.phoneNumber && <p className='text-red'>Phone Number is required</p>}
                 </div>
           
 
                 {/* Submit Button */}
-                <button className="btn btn-gradient btn-lg w-full text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform duration-200 bg-linear-to-r from-purple-500 to-indigo-500 shadow-lg">
+                <button className="btn btn-primary w-full font-bold hover:scale-105 transition-transform duration-200 ">
                     Post your Tuition
                 </button>
 

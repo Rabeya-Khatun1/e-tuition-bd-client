@@ -21,7 +21,7 @@ const OngoingTuitions = () => {
   };
 
   return (
-    <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
+    <div className="overflow-x-auto p-4 bg-base-200 rounded-2xl shadow-md">
       <title>eTuitionBd-Dashboard-OnGoningTuitions</title>
       <h2 className="text-2xl font-bold mb-4 text-center">Ongoing Tuitions</h2>
       <table className="table table-zebra w-full">
@@ -52,7 +52,7 @@ const OngoingTuitions = () => {
       <td>{tuition.trackingId}</td>
       <td>{tuition.tuitionPostClassStatus}</td>
       <td>
-        <Link  to={`/dashboard/chat?with=${tuition?.tuitionPostEmail}&name=${tuition?.tuitionPostName}`}><button>Send Message</button></Link>
+        <Link  to={`/dashboard/chat?with=${tuition?.tuitionPostEmail}&name=${tuition?.tuitionPostName}`}><button className='btn btn-primary'>Send Message</button></Link>
         
       </td>
     </tr>

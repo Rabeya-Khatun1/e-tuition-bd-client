@@ -36,7 +36,7 @@ const ReviewChecklist = ({ tuitionId, onSubmit }) => {
         {items.map(({ id, label }) => (
           <label
             key={id}
-            className="flex items-center gap-3 p-3 rounded-xl border hover:border-blue-500 cursor-pointer transition-all duration-200"
+            className="flex items-center gap-3 p-3 rounded-2xl border hover:border-blue-500 cursor-pointer transition-all duration-200"
           >
             <input
               type="checkbox"
@@ -51,7 +51,7 @@ const ReviewChecklist = ({ tuitionId, onSubmit }) => {
 
       <button
         onClick={handleSubmit}
-        className="mt-6 w-full py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 hover:scale-[1.02] transition-all duration-300"
+        className="mt-6 w-full btn btn-primary font-semibold hover:scale-[1.02] transition-all duration-300"
       >
         Submit Review
       </button>

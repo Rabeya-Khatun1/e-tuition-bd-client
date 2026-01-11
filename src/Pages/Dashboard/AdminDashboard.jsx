@@ -142,7 +142,7 @@ setStats(res.data);
                 <Line 
                   type="monotone" 
                   dataKey="earnings" 
-                  stroke="#4F46E5" 
+                  stroke="#005B3B" 
                   strokeWidth={3} 
                   dot={{ r: 5, fill: '#4F46E5', stroke: '#fff', strokeWidth: 2 }} 
                   activeDot={{ r: 8 }}

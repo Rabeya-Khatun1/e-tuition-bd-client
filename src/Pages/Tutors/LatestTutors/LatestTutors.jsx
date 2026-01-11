@@ -3,13 +3,12 @@ import React from 'react';
 import { motion } from "framer-motion";
 import useAxios from '../../../Hooks/useAxios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { FaStar } from 'react-icons/fa';
+import { Autoplay, Navigation } from 'swiper/modules';
+import { FaStar, FaRegClock } from 'react-icons/fa';
+import { IoLocation } from 'react-icons/io5';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Link } from 'react-router';
-
-
 
 const LatestTutors = () => {
   const axios = useAxios();
@@ -23,114 +22,107 @@ const LatestTutors = () => {
   });
 
   return (
-    <section className="py-20 bg-linear-to-b from-purple-50 via-indigo-50 to-white">
+    <section className="pt-20">
       <div className="container mx-auto px-4">
-     <section className="relative h-[500px] bg-linear-to-r from-purple-50 to-indigo-100 flex flex-col justify-center items-center px-6 text-center">
-      
-  
-      <motion.h1
-        className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-6"
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 50, damping: 20, duration: 1 }}
-      >
-        Unlock Your Learning Potential
-      </motion.h1>
 
-      <motion.p
-        className="text-lg sm:text-xl text-gray-600 max-w-xl"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1.2 }}
-      >
-        Connect with expert tutors anytime, anywhere, and elevate your skills with personalized guidance.
-      </motion.p>
-<Link to='/dashboard/postTuition'>
-      <motion.button
-        className="mt-8 px-6 py-3 bg-blue-400 hover:bg-blue-500 text-white rounded-full font-semibold transition-colors"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        Get Started
-      </motion.button></Link>
-    </section>
+        {/* Hero Section */}
+        <section className="relative flex flex-col justify-center items-center px-6 text-center">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl font-bold  mb-6"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 50, damping: 20 }}
+          >
+            Unlock Your Learning Potential
+          </motion.h1>
+
+          <motion.p
+            className="text-lg sm:text-xl  max-w-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            Connect with expert tutors anytime, anywhere, and elevate your skills with personalized guidance.
+          </motion.p>
+
+    
+        </section>
 
 
-        <h2 className="text-3xl sm:text-4xl font-bold my-12 text-center text-gray-800">
-          Meet Our Tutors
-        </h2>
+        <p className="text-center  max-w-3xl mx-auto mb-10">
+          Discover a community of passionate, experienced, and verified tutors ready to guide students toward success.
+        </p>
 
-<p className='text-center text-black my-5'>Discover a community of passionate, experienced, and verified tutors ready to guide students toward success. Each tutor on our platform brings strong subject expertise, real teaching experience, and a commitment to helping learners grow with confidence. Explore their profiles, check their specialties, and find the perfect match for your learning journey!</p>
+        {/* Swiper */}
+        <Swiper
+          navigation
+          modules={[Navigation, Autoplay]}
+          spaceBetween={30}
+          autoplay={{ delay: 1500, disableOnInteraction: false }}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          {tutors.map((tutor, index) => (
+            <SwiperSlide key={tutor._id || index}>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-linear-to-br from-white to-purple-50 hover:scale-105 transition-transform shadow-lg hover:shadow-2xl rounded-2xl p-6 border border-gray-100 flex flex-col justify-between relative"
+              >
+                {/* Rating */}
+                {tutor.rating && (
+                  <div className="absolute top-4 right-4 bg-yellow-400 text-white rounded-full px-3 py-1 text-xs font-semibold shadow-md flex items-center gap-1">
+                    <FaStar size={14} /> {tutor.rating}
+                  </div>
+                )}
 
-<Swiper
-  navigation={true} modules={[Navigation, Autoplay]} className="mySwiper"
-  spaceBetween={30}
-  breakpoints={{
-    640: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-    1280: { slidesPerView: 3 },
-  }}
-  autoplay={    {delay: 1500, 
-    disableOnInteraction: false,}}
->
-  {tutors.map((tutor) => (
-    <SwiperSlide key={tutor.id}>
-      <motion.div
-        className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 flex flex-col items-center"
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <div className="flex justify-center mb-4">
-          <div className="rounded-full p-1 bg-linear-to-r from-purple-400 to-indigo-400">
-            <img
-              src={tutor.profilePhoto || tutor.photo}
-              alt={tutor.name}
-              className="w-24 h-24 rounded-full object-cover border-2 border-white"
-            />
-          </div>
-        </div>
+                <div className="flex flex-col items-center">
+                  {/* Profile */}
+                  <div className="w-20 h-20 rounded-full p-1 bg-linear-to-tr from-purple-400 via-pink-400 to-indigo-400 shadow-lg mb-4">
+                    <img
+                      src={tutor.profilePhoto || tutor.photo}
+                      alt={tutor.name}
+                      className="w-full h-full rounded-full object-cover border-2 border-white"
+                    />
+                  </div>
 
-        <h3 className="text-xl font-semibold text-center text-gray-800 mb-1">{tutor.name}</h3>
-        <p className="text-center text-gray-500 mb-3 text-sm">Qualifications: {tutor.
-qualifications}</p>
+                  {/* Name (Tuition subject style) */}
+                  <h3 className="font-semibold text-xl text-gray-800 text-center mb-3">
+                    {tutor.name}
+                  </h3>
 
-        <div className="text-center text-gray-600 text-sm space-y-1">
-          <p><span className="font-medium">Subjects:</span> {tutor.
-tuitionPostSubject}</p>
-          <p><span className="font-medium">Experience:</span> {tutor.
-experience}</p>
-          <p><span className="font-medium">Location:</span> {tutor.expectedSalary}</p>
-       {tutor.rating && (
-  <div className="flex items-center justify-center gap-1 mt-2">
-    {[...Array(5)].map((_, index) => (
-      <FaStar
-        key={index}
-        className={
-          index < Math.round(tutor.rating)
-            ? "text-yellow-400"
-            : "text-gray-300"
-        }
-        size={14}
-      />
-    ))}
-    <span className="ml-2 text-sm text-gray-600">
-      ({tutor.rating})
-    </span>
-  </div>
-)}
+                  {/* Experience badge (Budget style) */}
+                  <div className="bg-purple-100 text-blue-700 py-1 px-3 rounded-full inline-block mb-3 text-sm font-medium">
+                    {tutor.experience} yrs experience
+                  </div>
 
-        </div>
+                  {/* Location */}
+                  <p className=" text-sm mb-2 flex items-center gap-2">
+                    <IoLocation className="text-blue-400" />
+                    {tutor.expectedSalary || "Location N/A"}
+                  </p>
 
-        
-      </motion.div>
-    </SwiperSlide>
-  ))}
-</Swiper>
+                  {/* Subjects */}
+                  <p className=" text-sm mb-2 flex items-center gap-2">
+                    <FaRegClock className="text-blue-400" />
+                    {tutor.tuitionPostSubject || "Subjects N/A"}
+                  </p>
 
-        
+                  {/* Intro */}
+                  <p className="text-gray-500 text-sm text-center line-clamp-3 mt-2">
+                    {tutor.qualifications || "No description provided."}
+                  </p>
+                </div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
       </div>
     </section>
   );

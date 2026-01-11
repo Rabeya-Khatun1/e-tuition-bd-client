@@ -23,7 +23,7 @@ const RevenueHistory = () => {
     <div className="p-6 bg-gray-50 min-h-screen">
       <title>eTuitionBd-Dashboard-RevenueHistory</title>
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Revenue History</h2>
-      <div className="bg-white shadow-md rounded-lg p-4 mb-6 flex items-center space-x-4">
+      <div className="bg-white shadow-md rounded-2xl p-4 mb-6 flex items-center space-x-4">
         <FaDollarSign className="text-green-500 text-3xl" />
         <div>
           <p className="text-gray-500">Total Earnings</p>
@@ -31,7 +31,7 @@ const RevenueHistory = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+      <div className="overflow-x-auto bg-white shadow-md rounded-2xl">
         <table className="w-full table-auto">
           <thead className="bg-gray-100">
             <tr>
@@ -54,7 +54,7 @@ const RevenueHistory = () => {
                   <td className="p-3 border-b">{new Date(payment.paidAt).toLocaleDateString()}</td>
                   <td className="p-3 border-b">৳{payment.amount}</td>
                   <td className="p-3 border-b">{payment.studentName}</td>
-                  <td className="p-3 border-b font-mono text-gray-600">{payment.trackingId}</td>
+                  <td className="p-3 border-b font-mono ">{payment.trackingId}</td>
                 </tr>
               ))
             )}

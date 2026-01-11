@@ -52,7 +52,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-full p-4 bg-base-200 rounded-lg shadow-md">
+    <div className="flex flex-col h-full p-4 bg-base-200 rounded-2xl shadow-md">
       <h2 className="text-xl font-bold mb-4">Chat with {withName}</h2>
 
       <div className="flex-1 overflow-y-auto mb-4 space-y-2 p-2 bg-white rounded shadow-inner">

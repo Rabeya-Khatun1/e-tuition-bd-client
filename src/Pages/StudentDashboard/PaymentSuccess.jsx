@@ -27,17 +27,17 @@ const PaymentSuccess = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-r from-green-100 to-green-200 p-4">
       <title>eTuitionBd-Dashboard-PaymentSuccess</title>
-      <div className="bg-white rounded-3xl shadow-xl p-8 max-w-lg w-full text-center">
+      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full text-center">
         <FaCheckCircle className="text-green-600 text-6xl mx-auto mb-4 animate-bounce" />
         <h2 className="text-3xl font-bold mb-4 text-green-700">
           Payment Successful!
         </h2>
         {payment ? (
           <div className="space-y-3 text-gray-700">
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Tracking ID:</span> {payment.trackingId}
             </p>
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Transaction ID:</span> {payment.transactionId}
             </p>
             <p className="mt-4 text-green-600 font-semibold">
@@ -49,7 +49,7 @@ const PaymentSuccess = () => {
         )}
         <button
           onClick={() => window.location.replace('/dashboard')}
-          className="mt-8 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-semibold transition"
+          className="mt-8 btn btn-primary hover:bg-primary-400 font-semibold transition"
         >
           Go to Dashboard
         </button>

@@ -37,7 +37,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 ">
       <div className="max-w-6xl mx-auto px-6 text-black">
         
         <motion.h2
@@ -59,7 +59,7 @@ const WhyChooseUs = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-lg transition-all"
+              className="bg-white p-6 rounded-2xl shadow-sm  hover:shadow-lg transition-all"
             >
               <div className="flex items-center justify-center mb-4 text-indigo-600">
                 {item.icon}
@@ -67,7 +67,7 @@ const WhyChooseUs = () => {
               <h3 className="text-xl font-semibold text-center mb-2 text-black">
                 {item.title}
               </h3>
-              <p className="text-gray-600 text-center text-sm">
+              <p className=" text-center text-sm">
                 {item.desc}
               </p>
             </motion.div>

@@ -25,7 +25,7 @@ const StudentsReviews = () => {
           {reviews.map((review) => (
             <div
               key={review._id}
-              className="bg-white p-4 rounded-xl shadow-md border border-gray-200"
+              className="bg-white p-4 rounded-2xl shadow-md border border-gray-200"
             >
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-lg font-semibold">{review.subject}</h3>

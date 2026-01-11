@@ -13,7 +13,7 @@ This project was developed as part of a **job task assessment**, focusing on rea
 ##  Live Website
 
 * **Client Live URL:** [https://e-tuition-bd-3d12f.web.app/](https://e-tuition-bd-3d12f.web.app/)
-* **Server Live URL:** [https://e-tuition-bd-server.vercel.app/](https://e-tuition-bd-server.vercel.app/)
+* **Server Live URL:** [https://e-tuition-bd-server-pi.vercel.app//](https://e-tuition-bd-server-pi.vercel.app//)
 
 >  Firebase authorized domains are properly configured and all environment variables are secured.
 

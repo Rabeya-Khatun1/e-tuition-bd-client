@@ -106,7 +106,7 @@ const TutorDashboard = () => {
           ) : activities.length > 0 ? (
             <ul className="space-y-3 divide-y divide-gray-200">
               {activities.map(log => ( 
-                <li key={log._id} className="flex justify-between items-center pt-3 hover:bg-gray-50 p-2 rounded-lg transition duration-200">
+                <li key={log._id} className="flex justify-between items-center pt-3 hover:bg-gray-50 p-2 rounded-2xl transition duration-200">
                   <span className="text-base text-gray-700 font-medium">
                     {log.details}
                   </span>
@@ -122,7 +122,7 @@ const TutorDashboard = () => {
             </ul>
           ) : (
             <div className="text-center py-6 text-gray-500">
-              <p>No recent activities found.</p>
+              <p classname="text-lg">No recent activities found.</p>
             </div>
           )}
         </div>

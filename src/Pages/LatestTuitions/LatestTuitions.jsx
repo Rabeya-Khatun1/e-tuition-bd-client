@@ -25,7 +25,7 @@ return res.data.tuitions;
 const tuitions = data || []
 
   return (
-   <div className="px-6 py-20 bg-linear-to-br from-indigo-100 via-purple-100 to-white">
+   <div className="px-6 py-20 ">
   <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 text-center mb-14">
     Latest Tuition Posts
   </h2>
@@ -64,10 +64,10 @@ const tuitions = data || []
                 {tuition.subject}
               </h3>
 
-              <p className="text-gray-600 text-sm mb-2 flex tuitions-center">
+              <p className=" text-sm mb-2 flex tuitions-center">
                 <IoLocation className="mr-2 text-blue-400" /> {tuition.location}
               </p>
-              <p className="text-gray-600 text-sm mb-3 flex tuitions-center">
+              <p className=" text-sm mb-3 flex tuitions-center">
                 <FaRegClock className="mr-2 text-blue-400" /> {tuition.timing}
               </p>
 
@@ -82,7 +82,7 @@ const tuitions = data || []
               </p>
 
               <Link to={`/viewTuitionDetails/${tuition._id}`}>
-                <button className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors">
+                <button className="w-full btn btn-primary font-semibold hover:bg-secondary-500 transition-colors">
                   View Details
                 </button>
               </Link>

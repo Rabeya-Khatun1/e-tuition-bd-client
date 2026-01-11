@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import useAxios from '../../Hooks/useAxios';
 import { IoLocation } from 'react-icons/io5';
 import { FaRegClock } from 'react-icons/fa';
+import { AnimatePresence } from "framer-motion";
+
 import { Link, useSearchParams } from 'react-router';
 
 const Tuitions = () => {
@@ -11,6 +13,7 @@ const Tuitions = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const subjects = ["All", "Math", "English", "Bangla", "Physics", "Chemistry"];
+ const [openReview, setOpenReview] = useState(null);
 
   const subject = searchParams.get("subject") || "";
   const location = searchParams.get("location") || "";
@@ -47,7 +50,7 @@ const Tuitions = () => {
 
   return (
     <div className='px-12'>
-      <h2 className="text-4xl font-bold text-center my-12 text-gray-600">
+      <h2 className="text-4xl font-bold text-center my-12 ">
         Explore Available Tuitions
       </h2>
 
@@ -56,7 +59,7 @@ const Tuitions = () => {
         <select
           value={sortBy}
           onChange={(e) => updateSort(e.target.value)}
-          className="border rounded-lg px-4 py-2"
+          className="border rounded-2xl px-4 py-2"
         >
           <option value="">Sort by</option>
           <option value="date_desc">Newest First</option>
@@ -72,9 +75,9 @@ const Tuitions = () => {
           <button
             key={subj}
             onClick={() => updateSearch("subject", subj)}
-            className={`px-4 py-2 rounded-full text-sm font-medium
+            className={`btn rounded-2xl text-sm font-medium
               ${subject === (subj === "All" ? "" : subj)
-                ? "bg-blue-500 text-white"
+                ? "bg-primary-500 text-white"
                 : "bg-gray-200 text-gray-800"}`}
           >
             {subj}
@@ -84,70 +87,58 @@ const Tuitions = () => {
 
  
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tuitions.map((tuition, index) => (
-          <motion.div
-            key={tuition._id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-white rounded-2xl shadow-lg p-6 border hover:shadow-2xl transition"
-          >
-            <h3 className="text-xl font-semibold mb-3">{tuition.subject}</h3>
+      {tuitions.map((tuition, index) => (
+  <motion.div
+    key={tuition._id}
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
+    className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all p-6 flex flex-col justify-between"
+  >
+    {/* Top Info */}
+    <div>
+      <h3 className="text-xl font-semibold text-gray-900 mb-4 capitalize">
+        {tuition.subject}
+      </h3>
 
-            <p className="text-sm text-gray-600 flex items-center mb-1">
-              <IoLocation className="mr-2 text-blue-400" /> {tuition.location}
-            </p>
+      <div className="space-y-2 mb-3">
+        <p className="flex items-center text-sm ">
+          <IoLocation className="mr-2 text-blue-500" />
+          {tuition.location}
+        </p>
+        <p className="flex items-center text-sm ">
+          <FaRegClock className="mr-2 text-blue-500" />
+          {tuition.timing}
+        </p>
+      </div>
 
-            <p className="text-sm text-gray-600 flex items-center mb-3">
-              <FaRegClock className="mr-2 text-blue-400" /> {tuition.timing}
-            </p>
+      <span className="inline-block bg-purple-100 text-purple-700 text-sm font-medium px-4 py-1 rounded-full mb-4">
+        Budget: {tuition.budget}
+      </span>
+      <button
+  onClick={() =>
+    setOpenReview(openReview === tuition._id ? null : tuition._id)
+  }
+  className="text-sm text-secondary-500 font-medium hover:underline m-2"
+>
+  {openReview === tuition._id ? "Hide Review" : "View Review"}
+</button>
 
-            <span className="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm mb-4">
-              Budget: {tuition.budget}
-            </span>
 
-      
-            {tuition.reviewChecklist && (
-              <div className="bg-green-50 p-3 rounded-xl border border-green-200 mb-4">
-                <p className="text-sm font-semibold text-green-700 mb-2">
-                  Admin Verified
-                </p>
 
-                <ul className="text-xs space-y-1">
-                  <li className="flex justify-between">
-                    <span>Student Info</span>
-                    <span>{tuition.reviewChecklist.studentInfo ? "✅" : "❌"}</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Contact Valid</span>
-                    <span>{tuition.reviewChecklist.contactValid ? "✅" : "❌"}</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Subject Correct</span>
-                    <span>{tuition.reviewChecklist.subjectCorrect ? "✅" : "❌"}</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Schedule OK</span>
-                    <span>{tuition.reviewChecklist.scheduleOk ? "✅" : "❌"}</span>
-                  </li>
-                </ul>
 
-                {tuition.reviewChecklist.reviewedAt && (
-                  <p className="text-[10px] text-gray-500 mt-2">
-                    Reviewed on{" "}
-                    {new Date(tuition.reviewChecklist.reviewedAt).toLocaleDateString()}
-                  </p>
-                )}
-              </div>
-            )}
+    </div>
 
-            <Link to={`/viewTuitionDetails/${tuition._id}`}>
-              <button className="w-full py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600">
-                View Details
-              </button>
-            </Link>
-          </motion.div>
-        ))}
+    {/* Button */}
+    <Link to={`/viewTuitionDetails/${tuition._id}`} className="mt-5">
+      <button className="w-full btn btn-primary font-semibold hover:bg-secondary-100 transition">
+        View Details
+      </button>
+    </Link>
+  </motion.div>
+))}
+
       </div>
 
       {/* Pagination */}
@@ -159,7 +150,7 @@ const Tuitions = () => {
             setPage(newPage);
             setSearchParams({ subject, location, page: newPage });
           }}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-40"
+          className="btn bg-gray-300 rounded disabled:opacity-40"
         >
           Previous
         </button>
@@ -175,11 +166,65 @@ const Tuitions = () => {
             setPage(newPage);
             setSearchParams({ subject, location, page: newPage });
           }}
-          className="px-4 py-2 bg-purple-500 text-white rounded disabled:opacity-40"
+          className="btn bg-primary-300 disabled:opacity-40"
         >
           Next
         </button>
       </div>
+      <AnimatePresence>
+  {openReview && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setOpenReview(null)}
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-2xl w-[90%] max-w-md p-6 shadow-2xl"
+      >
+        <h3 className="text-lg font-semibold text-green-700 mb-3">
+          Admin Verified
+        </h3>
+
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li className="flex justify-between">
+            Student Info <span className="text-green-600">✔</span>
+          </li>
+          <li className="flex justify-between">
+            Contact Valid <span className="text-green-600">✔</span>
+          </li>
+          <li className="flex justify-between">
+            Subject Correct <span className="text-green-600">✔</span>
+          </li>
+          <li className="flex justify-between">
+            Schedule OK <span className="text-green-600">✔</span>
+          </li>
+        </ul>
+
+        <p className="text-xs text-gray-500 mt-4">
+          Reviewed on{" "}
+          {new Date(
+            openReview.reviewedAt || openReview.date
+          ).toLocaleDateString()}
+        </p>
+
+        <button
+          onClick={() => setOpenReview(null)}
+          className="mt-6 w-full py-2 rounded-2xl bg-primary-200  font-medium "
+        >
+          Close
+        </button>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </div>
   );
 };

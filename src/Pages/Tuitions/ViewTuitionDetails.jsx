@@ -91,7 +91,7 @@ axiosSecure.post("/applications", tutorInfo)
   })
   .catch((err) => {
     if (err?.response?.status === 400) {
-      setAlreadyApplied(true);   // ✅ already applied
+      setAlreadyApplied(true);   
     }
 
     Swal.fire({
@@ -117,7 +117,7 @@ axiosSecure.post("/applications", tutorInfo)
     <div className="max-w-3xl mx-auto mt-12">
 
   
-      <div className="backdrop-blur-xl my-5 bg-white/40 border border-white/20 shadow-2xl bg-linear-to-br from-green-500 to-red-300 rounded-3xl p-8 animate-[fadeIn_0.4s_ease]">
+      <div className="backdrop-blur-xl my-5 bg-white/40 border border-white/20 shadow-2xl  rounded-2xl p-8 animate-[fadeIn_0.4s_ease]">
         
         <h1 className="text-3xl font-bold text-center text-blue-700 mb-6 tracking-wide">
           Tuition Details
@@ -160,14 +160,14 @@ axiosSecure.post("/applications", tutorInfo)
 {!alreadyApplied ? (
   <button
     onClick={handleApply}
-    className="w-full mt-8 py-3 text-lg font-semibold text-white rounded-2xl
-    bg-linear-to-r from-blue-500 to-blue-700 shadow-xl hover:from-blue-600 hover:to-blue-800
+    className="w-full mt-8  font-semibold 
+    btn btn-primary
     flex justify-center items-center gap-2 transition-all active:scale-95"
   >
     <FaPaperPlane /> Apply Now
   </button>
 ) : (
-  <div className="w-full mt-8 py-3 text-center rounded-2xl bg-green-100 text-green-700 font-semibold">
+  <div className="w-full mt-8 py-3 text-center rounded-2xl bg-primary-100 text-primary-600 font-semibold">
      You already applied for this tuition
   </div>
 )}
@@ -184,7 +184,7 @@ axiosSecure.post("/applications", tutorInfo)
                 <FaPaperPlane /> Apply for {selectedTuition?.subject}
               </h2>
               <FaTimes
-                className="text-gray-600 cursor-pointer hover:text-red-500"
+                className=" cursor-pointer hover:text-red-500"
                 onClick={() => setOpenModal(false)}
               />
             </div>
@@ -197,7 +197,7 @@ axiosSecure.post("/applications", tutorInfo)
                 </label>
                 <input
                   {...register("name")}
-                  className="w-full p-2 rounded-lg border focus:ring-1 focus:ring-blue-400"
+                  className="w-full p-2 rounded-2xl border focus:ring-1 focus:ring-blue-400"
                 />
               </div>
 
@@ -206,7 +206,7 @@ axiosSecure.post("/applications", tutorInfo)
                 <input
                   value={user?.email}
                   readOnly
-                  className="w-full p-2 rounded-lg border bg-gray-100"
+                  className="w-full p-2 rounded-2xl border bg-gray-100"
                 />
               </div>
 
@@ -214,7 +214,7 @@ axiosSecure.post("/applications", tutorInfo)
                 <label className="text-sm font-medium">Qualifications</label>
                 <input
                   {...register("qualifications")}
-                  className="w-full p-2 rounded-lg border"
+                  className="w-full p-2 rounded-2xl border"
                   placeholder="Your qualifications"
                 />
               </div>
@@ -223,7 +223,7 @@ axiosSecure.post("/applications", tutorInfo)
                 <label className="text-sm font-medium">Experience</label>
                 <input
                   {...register("experience")}
-                  className="w-full p-2 rounded-lg border"
+                  className="w-full p-2 rounded-2xl border"
                   placeholder="Teaching Experience"
                 />
               </div>
@@ -233,7 +233,7 @@ axiosSecure.post("/applications", tutorInfo)
                 <input
                   type="number"
                   {...register("expectedSalary")}
-                  className="w-full p-2 rounded-lg border"
+                  className="w-full p-2 rounded-2xl border"
                   placeholder="Expected Salary"
                 />
               </div>
@@ -242,14 +242,14 @@ axiosSecure.post("/applications", tutorInfo)
                 <button
                   type="button"
                   onClick={() => setOpenModal(false)}
-                  className="flex-1 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition"
+                  className="flex-1 py-2 bg-gray-300 rounded-2xl hover:bg-gray-400 transition"
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="flex-1 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                  className="flex-1 py-2 bg-primary-300 text-white rounded-2xl font-semibold hover:bg-primary-600 transition"
                 >
                   Submit
                 </button>

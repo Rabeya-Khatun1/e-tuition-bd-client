@@ -91,7 +91,7 @@ const handleRemoveTuition = (id)=>{
 }
 
   return (
-    <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
+    <div className="overflow-x-auto p-4 bg-base-200 rounded-2xl shadow-md">
       <title>eTuitionBd-Dashboard-MyTuitions</title>
       <h2 className="text-2xl font-bold mb-4 text-center">My Tuitions:{allTuitions.length}</h2>
       <table className="table table-zebra w-full">
@@ -121,7 +121,7 @@ const handleRemoveTuition = (id)=>{
               <td>{tuition.location}</td>
               <td>{handleStatusBadge(tuition.status)}</td>
               <td>
-                {tuition.paymentStatus === 'paid' ? <p  className=" py-1 px-1 text-center text-green-500 font-semibold rounded-lg shadow-md transition">paid</p>  : <p  className=" py-1 px-1 text-center bg-green-400  text-white font-semibold rounded-lg shadow-md transition">Unpaid</p>}
+                {tuition.paymentStatus === 'paid' ? <p  className=" py-1 px-1 text-center text-green-500 font-semibold rounded-2xl shadow-md transition">paid</p>  : <p  className=" py-1 px-1 text-center bg-green-400  text-white font-semibold rounded-2xl shadow-md transition">Unpaid</p>}
               </td>
               
               <td>{tuition.budget}</td>

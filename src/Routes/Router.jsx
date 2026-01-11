@@ -31,6 +31,10 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import StudentsReviews from "../Pages/TutorDashboard/StudentsReviews";
 import Chat from "../Pages/StudentDashboard/Chat";
+import Blog from "../Pages/ExtraSections/Blog";
+import WhyChooseUs from "../Pages/WhyChooseUs/WhyChooseUs";
+import FAQ from "../Pages/ExtraSections/FAQ";
+import PrivacyPolicy from "../Pages/ExtraSections/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +76,23 @@ export const router = createBrowserRouter([
     path: '/login',
     Component: Login,
   },
+  {
+    path: '/blog',
+    Component: Blog,
+  },
+  {
+    path: '/features',
+    Component: WhyChooseUs,
+  },
+  {
+    path: '/faq',
+    Component: FAQ,
+  },
+  {
+    path: '/privacy-policy',
+    Component: PrivacyPolicy,
+  },
+
   {
     path: '/dashboard',
     Component:DashboardLayout,

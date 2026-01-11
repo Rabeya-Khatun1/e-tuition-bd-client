@@ -25,7 +25,7 @@ const handleSubjectClick = (subjectName)=>{
 
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-6 bg-linear-to-br from-indigo-100 via-purple-100 to-white overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center px-6  overflow-hidden">
 
       
       <motion.div
@@ -74,17 +74,17 @@ const handleSubjectClick = (subjectName)=>{
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-          className="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight"
+          className="text-4xl md:text-6xl font-extrabold  leading-tight"
         
         >
-          Your Trusted <span className="text-indigo-600">Tuition Companion</span>
+       <span className="text-primary-600">   Your Trusted </span>Tuition Companion
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.9 }}
-          className="text-lg md:text-xl text-gray-600"
+          className="text-lg md:text-xl "
         >
           Smart search, verified profiles, direct messaging.
         </motion.p>

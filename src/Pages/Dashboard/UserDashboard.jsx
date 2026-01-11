@@ -49,7 +49,7 @@ const UserDashboard = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 bg-indigo-50 px-4 py-2 rounded-xl">
+          <div className="flex items-center gap-3 bg-indigo-50 px-4 py-2 rounded-2xl">
             <FaUserGraduate className="text-indigo-500 text-xl" />
             <div className="text-sm">
               <p className="font-semibold text-gray-700">
@@ -89,7 +89,7 @@ const UserDashboard = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="flex justify-between items-center bg-linear-to-r from-white to-indigo-50 border border-indigo-100 rounded-xl px-5 py-4 hover:shadow-md transition"
+                  className="flex justify-between items-center bg-linear-to-r from-white to-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4 hover:shadow-md transition"
                 >
                   <div>
                     <p className="font-medium text-gray-800 capitalize">

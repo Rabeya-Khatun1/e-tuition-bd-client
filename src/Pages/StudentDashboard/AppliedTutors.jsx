@@ -191,7 +191,7 @@ tuitionPostSubject,
   };
 
   return (
-    <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
+    <div className="overflow-x-auto p-4 bg-base-200 rounded-2xl shadow-md">
       <title>eTuitionBd-Dashboard-AppliedTutors</title>
       <h2 className="text-2xl font-bold mb-4 text-center">Applied tutors for my tuitions</h2>
       <table className="table table-zebra w-full">
@@ -247,7 +247,7 @@ tuitionPostSubject,
         <button
         
           className={`${
-            active ? 'bg-gray-100' : ''
+            active ? 'bg-primary-200' : ''
           } w-full text-left px-4 py-2`}
         >
           Send Message
@@ -260,7 +260,7 @@ tuitionPostSubject,
           onClick={() => handleApproveAppliedTutor(appliedTutor)}
           disabled={appliedTutor.paymentStatus==='paid'}
           className={`${
-            active ? 'bg-gray-100' : ''
+            active ? 'bg-primary-200' : ''
           } w-full text-left px-4 py-2`}
         >
         Approve
@@ -271,7 +271,7 @@ tuitionPostSubject,
       {({ active }) => (
         <button
           onClick={() => handleRejectAppliedTutor(appliedTutor._id)}
-          className={`${active ? 'bg-gray-100' : ''} w-full text-left px-4 py-2`}
+          className={`${active ? 'bg-primary-200' : ''} w-full text-left px-4 py-2`}
         >
           Reject
         </button>
@@ -281,7 +281,7 @@ tuitionPostSubject,
       {({ active }) => (
         <button
           onClick={() => handleRemoveappliedTutor(appliedTutor._id)}
-          className={`${active ? 'bg-gray-100' : ''} w-full text-left px-4 py-2`}
+          className={`${active ? 'bg-primary-200' : ''} w-full text-left px-4 py-2`}
         >
           Remove
         </button>
@@ -292,7 +292,7 @@ tuitionPostSubject,
         {({ active }) => (
           <button
             onClick={() => handleMarkCompleted(appliedTutor)}
-            className={`${active ? 'bg-gray-100' : ''} w-full text-left px-4 py-2`}
+            className={`${active ? 'bg-primary-200' : ''} w-full text-left px-4 py-2`}
           >
             Mark as Completed
           </button>
@@ -308,7 +308,7 @@ tuitionPostSubject,
               setShowReviewForm(true);
               setIsModalOpen(true);
             }}
-            className={`${active ? 'bg-gray-100' : ''} w-full text-left px-4 py-2`}
+            className={`${active ? 'bg-primary-200' : ''} w-full text-left px-4 py-2`}
           >
             Give Review
           </button>

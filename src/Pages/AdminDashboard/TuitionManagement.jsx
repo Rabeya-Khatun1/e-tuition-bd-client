@@ -66,7 +66,7 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
         {pendingTuitions.map((t) => (
           <div
             key={t._id}
-            className="border rounded-xl shadow-lg p-5 hover:shadow-2xl transition duration-300 bg-linear-to-br from-green-500 to-red-300"
+            className="border rounded-2xl shadow-lg p-5 hover:shadow-2xl transition duration-300 bg-linear-to-br from-green-500 to-red-300"
           >
             <h3 className="text-xl font-semibold mb-2 text-gray-700">
               Class: {t.class} — Subject: {t.subject}
@@ -80,10 +80,10 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
               Status: {t.status}
             </p>
 
-            <p className="text-gray-600 mb-1">
+            <p className=" mb-1">
               <span className="font-medium">Phone:</span> {t.location}
             </p>
-            <p className="text-gray-600 mb-3">
+            <p className=" mb-3">
               <span className="font-medium">Days:</span> {t.days}
             </p>
 
@@ -97,14 +97,14 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
   <div className="flex gap-3 mt-4">
     <button
       onClick={() => handleAction(t._id, "approve")}
-      className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+      className="flex items-center gap-2 btn btn-primary  transition"
     >
       <FaCheck /> Approve
     </button>
 
     <button
       onClick={() => handleAction(t._id, "reject")}
-      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-2xl transition"
     >
       <FaTimes /> Reject
     </button>
@@ -120,7 +120,7 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
         <button
           onClick={() => page > 1 && setPage(page - 1)}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-40"
+          className="btn btn-primary disabled:opacity-40"
         >
           Previous
         </button>
@@ -132,7 +132,7 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
         <button
           onClick={() => page < totalPages && setPage(page + 1)}
           disabled={page === totalPages}
-          className="px-4 py-2 bg-purple-500 text-white rounded-lg disabled:opacity-40"
+          className="btn btn-primary disabled:opacity-40"
         >
           Next
         </button>

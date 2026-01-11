@@ -4,6 +4,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { FaUserEdit, FaPhoneAlt, FaExchangeAlt, FaTrash } from "react-icons/fa";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
+import UserActionMenu from './UserActionMenu';
 
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -140,9 +141,9 @@ const handleReject = async (id) => {
       <h3 className="text-4xl font-extrabold mb-8 text-gray-800 text-center">User Management</h3>
 
       {/* Users Table */}
-      <div className="overflow-x-auto shadow-lg rounded-lg bg-white mb-8">
+      <div className="overflow-x-auto shadow-lg rounded-2xl bg-white mb-8">
         <table className="min-w-full text-left">
-          <thead className="bg-linear-to-r from-blue-500 to-indigo-600 text-white">
+          <thead className="bg-primary-500 text-white">
             <tr>
               <th className="py-3 px-6">#</th>
               <th className="py-3 px-6">Name</th>
@@ -150,9 +151,7 @@ const handleReject = async (id) => {
               <th className="py-3 px-6">Email</th>
               <th className="py-3 px-6">Role</th>
               <th className="py-3 px-6">Phone</th>
-              <th className="py-3 px-6">Change Role</th>
-              <th className="py-3 px-6">Edit Name</th>
-              <th className="py-3 px-6">Edit Phone</th>
+          
               <th className="py-3 px-6">Actions</th>
             </tr>
           </thead>
@@ -167,38 +166,16 @@ const handleReject = async (id) => {
                 <td className="py-4 px-6">{u.email}</td>
                 <td className="py-4 px-6">{u.role}</td>
                 <td className="py-4 px-6">{u.phoneNumber || 'N/A'}</td>
-                <td className="py-4 px-6">
-                  <button
-                    className="bg-blue-400 text-white px-3 py-1 rounded flex items-center gap-1"
-                    onClick={() => handleChangeRole(u.email, u.role === "student" ? "tutor" : "student")}
-                  >
-                    <FaExchangeAlt /> Change
-                  </button>
-                </td>
-                <td className="py-4 px-6">
-                  <button
-                    className="bg-green-400 text-white px-3 py-1 rounded flex items-center gap-1"
-                    onClick={() => openEdit("name", u)}
-                  >
-                    <FaUserEdit /> Name
-                  </button>
-                </td>
-                <td className="py-4 px-6">
-                  <button
-                    className="bg-green-400 text-white px-3 py-1 rounded flex items-center gap-1"
-                    onClick={() => openEdit("phoneNumber", u)}
-                  >
-                    <FaPhoneAlt /> Phone
-                  </button>
-                </td>
-                <td className="py-4 px-6">
-                  <button
-                    className="bg-red-400 text-white px-3 py-1 rounded flex items-center gap-1"
-                    onClick={() => handleDeleteUser(u.email)}
-                  >
-                    <FaTrash /> Delete
-                  </button>
-                </td>
+              <td className="py-4 px-6">
+  <UserActionMenu
+    user={u}
+    handleChangeRole={handleChangeRole}
+    openEdit={openEdit}
+    handleDeleteUser={handleDeleteUser}
+  />
+</td>
+
+   
               </tr>
             ))}
           </tbody>
@@ -208,7 +185,7 @@ const handleReject = async (id) => {
       {/*  Modal */}
       {openField && (
         <div className="fixed top-0 left-0 w-full h-full bg-black/40 flex justify-center items-center">
-          <div className="bg-white p-5 rounded-lg shadow-lg w-96">
+          <div className="bg-white p-5 rounded-2xl shadow-lg w-96">
             <h3 className="text-xl font-bold mb-3 capitalize">Update {openField}</h3>
 
             {openField === "name" && (
@@ -237,7 +214,7 @@ const handleReject = async (id) => {
             )}
 
             <div className="flex gap-3 mt-3">
-              <button className="bg-green-500 text-white px-4 py-1 rounded" onClick={() => handleUpdate(editingUserEmail)}>
+              <button className="btn btn-primary " onClick={() => handleUpdate(editingUserEmail)}>
                 Save
               </button>
               <button className="bg-gray-400 text-white px-4 py-1 rounded" onClick={() => setOpenField(null)}>
@@ -280,19 +257,19 @@ const handleReject = async (id) => {
           </div>
 
           <div className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Subject:</span> {tutor.tuitionPostSubject || "N/A"}
             </p>
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Qualifications:</span> {tutor.qualifications || "N/A"}
             </p>
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Experience:</span> {tutor.experience || "N/A"}
             </p>
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Expected Salary:</span> {tutor.expectedSalary || "N/A"}
             </p>
-            <p>
+            <p classname="text-lg">
               <span className="font-semibold">Phone:</span> {tutor.phoneNumber || "N/A"}
             </p>
           </div>
@@ -301,14 +278,14 @@ const handleReject = async (id) => {
   <div className="flex gap-3 mt-6">
     <button
       onClick={() => handleVerifyAppliedTutor(tutor._id)}
-      className="flex-1 bg-linear-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+      className="flex-1  font-semibold btn btn-primary hover:scale-105 transition-transform duration-300"
     >
       Verify
     </button>
 
     <button
       onClick={() => setOpenRejectModal(tutor._id)}
-      className="flex-1 bg-linear-to-r from-red-500 to-red-700 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+      className="flex-1 bg-linear-to-r from-red-500 to-red-700 text-white font-semibold py-2 rounded-2xl shadow-md hover:scale-105 transition-transform duration-300"
     >
       Reject
     </button>
@@ -319,7 +296,7 @@ const handleReject = async (id) => {
           {/* Reject Modal */}
           {openRejectModal === tutor._id && (
             <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-3xl shadow-2xl w-96 transform scale-75 animate-scaleUp">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-2xl w-96 transform scale-75 animate-scaleUp">
                 <h3 className="text-2xl font-extrabold mb-4 text-center text-red-600">
                   Reject Application
                 </h3>
@@ -332,13 +309,13 @@ const handleReject = async (id) => {
                 />
                 <div className="flex justify-end gap-3 mt-5">
                   <button
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300"
                     onClick={() => handleReject(tutor._id)}
                   >
                     Reject
                   </button>
                   <button
-                    className="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-2 rounded-xl shadow transform hover:scale-105 transition-all duration-300"
+                    className="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-2 rounded-2xl shadow transform hover:scale-105 transition-all duration-300"
                     onClick={() => setOpenRejectModal(null)}
                   >
                     Cancel

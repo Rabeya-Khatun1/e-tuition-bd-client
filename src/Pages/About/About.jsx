@@ -25,7 +25,7 @@ const About = () => {
           <h1 className="text-6xl font-black mb-6 bg-linear-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent leading-tight">
             Connecting Education, Digitally.
           </h1>
-          <p className="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed font-light">
+          <p className=" max-w-4xl mx-auto text-xl leading-relaxed font-light">
             eTuitionBd is a modern Tuition Management System that bridges students
             and <span className="font-semibold">verified tutors</span> through a
             secure, transparent, and fully automated digital platform.
@@ -37,7 +37,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-white rounded-3xl p-12 shadow-2xl shadow-blue-100 border border-gray-100"
+          className="bg-white rounded-2xl p-12 shadow-2xl shadow-blue-100 border border-gray-100"
         >
           <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800">
             Why eTuitionBd?
@@ -86,7 +86,7 @@ const About = () => {
             >
               <FaUserGraduate className="text-6xl text-blue-500 mx-auto mb-6 bg-blue-50 p-3 rounded-full" />
               <h3 className="text-2xl font-bold mb-3">Students</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className=" leading-relaxed">
                 Post tuition requirements, review tutor applications, approve the
                 best match, and complete secure payments.
               </p>
@@ -114,11 +114,11 @@ const About = () => {
               whileHover={{ y: -10 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl p-10 text-center shadow-lg border-t-4 border-orange-500"
+              className="bg-white rounded-2xl p-10 text-center shadow-lg border-t-4 border-orange-500"
             >
               <FaUserShield className="text-6xl text-orange-500 mx-auto mb-6 bg-orange-50 p-3 rounded-full" />
               <h3 className="text-2xl font-bold mb-3">Admins</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className=" leading-relaxed">
                 Verify users, approve tuition posts, manage roles, and monitor
                 platform transactions.
               </p>
@@ -148,7 +148,7 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
                 viewport={{ once: true }}
-                className="flex items-start gap-3 bg-white p-5 rounded-xl border border-blue-200"
+                className="flex items-start gap-3 bg-white p-5 rounded-2xl border border-blue-200"
               >
                 <FaCheckCircle className="text-blue-500 mt-1" />
                 <p className="text-gray-700 font-medium">{item}</p>
@@ -162,7 +162,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center bg-linear-to-br from-blue-600 to-teal-500 rounded-3xl p-16 shadow-2xl"
+          className="text-center bg-linear-to-br from-blue-600 to-teal-500 rounded-2xl p-16 shadow-2xl"
         >
           <h2 className="text-4xl font-black mb-6 text-white">
             Our Vision

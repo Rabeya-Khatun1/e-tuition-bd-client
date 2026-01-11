@@ -14,7 +14,7 @@ const PaymentCanceled = () => {
                     Payment Cancelled
                 </h3>
 
-                <p className="text-gray-600 mt-2 mb-6">
+                <p className=" mt-2 mb-6">
                     Your payment could not be completed.  
                     You can try again anytime.
                 </p>

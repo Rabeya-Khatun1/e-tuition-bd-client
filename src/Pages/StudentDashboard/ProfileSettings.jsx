@@ -78,7 +78,7 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-linear-to-br from-green-500 to-red-300 rounded-3xl shadow-2xl border border-white/30">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-linear-to-br from-green-500 to-red-300 rounded-2xl shadow-2xl border border-white/30">
       <title>eTuitionBd-Dashboard-ProfileSettings</title>
       <ToastContainer />
 
@@ -93,7 +93,7 @@ const ProfileSettings = () => {
 
           <button
             onClick={() => openEdit("photoURL")}
-            className="absolute bottom-1 right-1 bg-white/80 p-2 rounded-full text-gray-700 hover:bg-white transition-shadow shadow-lg">
+            className="absolute bottom-1 right-1 bg-white/80 p-2 rounded-full text-gray-700 hover:bg-primary-200 transition-shadow shadow-lg">
             <FaCamera />
           </button>
         </div>
@@ -109,7 +109,7 @@ const ProfileSettings = () => {
       <div className="mt-8 space-y-4">
 
         <div
-          className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-xl shadow-lg cursor-pointer"
+          className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg cursor-pointer"
           onClick={() => openEdit("phoneNumber")}
         >
           <div>
@@ -120,7 +120,7 @@ const ProfileSettings = () => {
         </div>
 
         <div
-          className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-xl shadow-lg cursor-pointer"
+          className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg cursor-pointer"
           onClick={() => openEdit("name")}
         >
           <div>
