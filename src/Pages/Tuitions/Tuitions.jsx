@@ -26,7 +26,7 @@ const Tuitions = () => {
     queryKey: ['tuitions', page, subject, location, sortBy],
     queryFn: async () => {
       const res = await axios.get(
-        `/tuitions?page=${page}&subject=${subject}&location=${location}&sortBy=${sortBy}`
+        `/tuitions?page=${page}&subject=${subject}&location=${location}&sortBy=${sortBy}&limit=8`
       );
       return res.data;
     }
@@ -86,7 +86,7 @@ const Tuitions = () => {
       </div>
 
  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {tuitions.map((tuition, index) => (
   <motion.div
     key={tuition._id}

@@ -62,11 +62,11 @@ const ReportAnalytics = () => {
 
       {/* summary cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="p-4 bg-green-300 rounded shadow">
+        <div className="p-4 bg-primary-300 rounded shadow">
           <h3 className="text-lg font-medium">Total Earnings</h3>
           <p className="text-2xl font-bold mt-1">${summary.totalEarnings || 0}</p>
         </div>
-        <div className="p-4 bg-blue-300 rounded shadow">
+        <div className="p-4 bg-primary-100 rounded shadow">
           <h3 className="text-lg font-medium">Total Transactions</h3>
           <p className="text-2xl font-bold mt-1">{summary.totalTransactions || 0}</p>
         </div>
@@ -91,7 +91,7 @@ const ReportAnalytics = () => {
                 <tr key={tx.transactionId} className="hover:bg-gray-50">
                   <td className="px-3 py-2">{tx.trackingId}</td>
                   <td className="px-3 py-2">{tx.studentName}</td>
-                  <td className="px-3 py-2 text-green-600 font-semibold">${tx.amount}</td>
+                  <td className="px-3 py-2 text-primary-400 font-semibold">${tx.amount}</td>
                   <td className="px-3 py-2">
                     <span className={`px-2 py-1 rounded-full text-white text-sm ${tx.status === "Completed" ? "bg-green-500" : tx.status === "Pending" ? "bg-yellow-500" : "bg-red-500"}`}>
                       {tx.status}
@@ -122,7 +122,7 @@ const ReportAnalytics = () => {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="Revenue" fill="#4f46e5" radius={[5,5,0,0]} />
+              <Bar dataKey="Revenue" fill="#66A588" radius={[5,5,0,0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

@@ -10,7 +10,7 @@ import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaSignInAlt, FaArrowLeft, FaUser
 
 const Login = () => {
   const { signInUser, forgetPassword } = useAuth();
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors }, getValues , setValue} = useForm();
   const navigate = useNavigate();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
@@ -95,6 +95,24 @@ const Login = () => {
       } 
     },
   };
+
+
+
+const handleDemoStudent = ()=>{
+  setValue('email','raiha@n.com')
+  setValue('password','Amiraihan1')
+
+}
+const handleDemoTutor = ()=>{
+  setValue('email','ahan@a.com')
+  setValue('password','Amiahana1')
+
+}
+const handleDemoAdmin = ()=>{
+  setValue('email','cutegirlrabeya2008@gmail.com')
+  setValue('password','Amirabeya1')
+
+}
 
   return (
     <motion.div
@@ -389,6 +407,7 @@ const Login = () => {
                     : 'btn btn-primary '
                 }`}
               >
+             
                 {isLoading ? (
                   <motion.span
                     animate={{ rotate: 360 }}
@@ -398,6 +417,7 @@ const Login = () => {
                     <span className="loading loading-spinner loading-sm mr-2"></span>
                     Signing In...
                   </motion.span>
+                  
                 ) : (
                   <>
                     <FaSignInAlt className="inline mr-2" />
@@ -405,6 +425,9 @@ const Login = () => {
                   </>
                 )}
               </motion.button>
+                 <button onClick={handleDemoStudent } className='btn btn-primary mt-2 w-full'>Demo Student Login</button>
+                 <button onClick={handleDemoTutor } className='btn btn-primary mt-2 w-full'>Demo Tutor Login</button>
+                 <button onClick={handleDemoAdmin } className='btn btn-primary mt-2 w-full'>Demo Admin Login</button>
             </motion.div>
           </form>
 

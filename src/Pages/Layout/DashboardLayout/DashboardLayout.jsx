@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaChalkboard, FaUserGraduate } from 'react-icons/fa';
+import { FaChalkboard, FaRegMoon, FaSun, FaUserGraduate } from 'react-icons/fa';
 import { IoHomeSharp } from 'react-icons/io5';
 import { PiChalkboardTeacherBold } from 'react-icons/pi';
 import { Link, Outlet } from 'react-router';
@@ -11,14 +11,8 @@ import Logo from '../../../Components/Logo/Logo';
 import useRole from '../../../Hooks/useRole';
 import Loading from '../../../Components/Loading/Loading';
 
-const DashboardLayout = () => {
-    const { role, roleLoading } = useRole();
 
-    if (roleLoading) {
-        return <Loading />;
-    }
 
-    // Helper function to render a sidebar link with tooltip
     const SidebarLink = ({ to, icon: Icon, label }) => (
         <li className="relative group">
             <Link to={to} className="flex items-center gap-3 p-2">
@@ -34,6 +28,14 @@ const DashboardLayout = () => {
         </li>
     );
 
+
+const DashboardLayout = () => {
+    const { role, roleLoading } = useRole();
+
+    if (roleLoading) {
+        return <Loading />;
+    }
+
     return (
         <div className="drawer lg:drawer-open">
             <title>eTuitionBd-Dashboard-Home</title>
@@ -41,17 +43,31 @@ const DashboardLayout = () => {
 
             <div className="drawer-content">
                 {/* Navbar */}
-                <nav className="navbar w-full bg-base-300">
-                    <label htmlFor="my-drawer-4" className="btn btn-square btn-ghost">
+                <nav className="navbar flex justify-between w-full">
+             <div className='flex'>
+                       <label htmlFor="my-drawer-4" className="btn btn-square btn-ghost">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth="2" fill="none" stroke="currentColor" className="size-4">
                             <path d="M4 4h16v16H4z"></path>
                             <path d="M9 4v16"></path>
                             <path d="M14 10l2 2l-2 2"></path>
                         </svg>
                     </label>
+
                     <Link to='/'><div className="px-4">
                         <Logo />
                     </div></Link>
+             </div>
+                                  <label className="swap swap-rotate hidden lg:flex items-center cursor-pointer">
+                          <input type="checkbox" className="theme-controller" value="dark" />
+                          <span className="swap-off flex items-center gap-2 text-base font-medium">
+                            <FaSun size={18} />
+                            Light
+                          </span>
+                          <span className="swap-on flex items-center gap-2 text-base font-medium">
+                            <FaRegMoon size={18} />
+                            Dark
+                          </span>
+                        </label>
                 </nav>
 
                 {/* PAGE CONTENT */}
@@ -67,6 +83,7 @@ const DashboardLayout = () => {
 
                         {/* Homepage */}
                         <SidebarLink to="/dashboard" icon={IoHomeSharp} label="Homepage" />
+                  
 
                         {/* Student Links */}
                         {role === 'student' && (
@@ -99,10 +116,12 @@ const DashboardLayout = () => {
 
                         {/* Settings */}
                         <SidebarLink to="/dashboard/profile-settings" icon={IoIosSettings} label="Settings" />
-
+       
                     </ul>
                 </div>
+         
             </div>
+            
         </div>
     );
 };

@@ -72,22 +72,22 @@ const TutorDashboard = () => {
         <TutorStatCard
           title="Approved Tuitions"
           value={approvedTuitions.length}
-          icon={<FaBookReader className="text-green-500" />}
-          color="border-green-500"
+          icon={<FaBookReader className="text-primary-200" />}
+          color="border-primary-200"
           isLoading={isLoadingApproved}
         />
         <TutorStatCard
           title="Applied Tuitions"
           value={appliedTuitions.length}
-          icon={<FaChalkboardTeacher className="text-yellow-500" />}
-          color="border-yellow-500"
+          icon={<FaChalkboardTeacher className="text-primary-500" />}
+          color="border-primary-500"
           isLoading={isLoadingApplied}
         />
         <TutorStatCard
           title="Total Earnings"
           value={earningsData}
-          icon={<FaMoneyBillWave className="text-blue-500" />}
-          color="border-blue-500"
+          icon={<FaMoneyBillWave className="text-secondary-300" />}
+          color="border-secondary-300"
           isLoading={isLoadingEarnings}
         />
       </div>

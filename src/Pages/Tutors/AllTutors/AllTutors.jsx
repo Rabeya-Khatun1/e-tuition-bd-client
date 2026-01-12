@@ -13,12 +13,12 @@ const AllTutors = () => {
   const { data = {} } = useQuery({
     queryKey: ['tutors', page],
     queryFn: async () => {
-      const res = await axios.get(`/tutorsApplications?page=${page}`);
+      const res = await axios.get(`/tutorsApplications?page=${page}&limit=8`);
       return res.data;
     },
   });
 
-  const tutors = (data.tutors || []).slice().reverse();
+  const tutors = data.tutors || []
   const totalPages = data.totalPages || 1;
 
   return (
@@ -30,7 +30,7 @@ const AllTutors = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {tutors.map((tutor, index) => (
       <motion.div
   key={tutor._id || tutor.id}

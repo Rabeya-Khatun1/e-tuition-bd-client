@@ -47,11 +47,6 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
     }
   };
 
-  const statusColors = {
-    pending: "bg-yellow-100 text-yellow-800",
-    approved: "bg-green-100 text-green-800",
-    rejected: "bg-red-100 text-red-800",
-  };
 
   return (
     <div className="p-6">
@@ -66,16 +61,14 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
         {pendingTuitions.map((t) => (
           <div
             key={t._id}
-            className="border rounded-2xl shadow-lg p-5 hover:shadow-2xl transition duration-300 bg-linear-to-br from-green-500 to-red-300"
+            className=" rounded-2xl shadow-lg p-5 hover:shadow-2xl transition duration-300 bg-primary-100"
           >
             <h3 className="text-xl font-semibold mb-2 text-gray-700">
               Class: {t.class} — Subject: {t.subject}
             </h3>
 
             <p
-              className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-2 ${
-                statusColors[t.status] || "bg-gray-100 text-gray-800"
-              }`}
+              className={`inline-block px-3 py-1 text-sm font-medium mb-2 `}
             >
               Status: {t.status}
             </p>

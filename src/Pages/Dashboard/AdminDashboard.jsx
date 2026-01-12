@@ -68,8 +68,8 @@ setStats(res.data);
 
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h2 className="text-4xl font-extrabold mb-10 text-gray-800 border-b-4 border-indigo-500 pb-2">
+    <div className="p-8  min-h-screen">
+      <h2 className="text-4xl font-extrabold mb-10  border-b-4 border-secondary-500 pb-2">
          Admin Overview
       </h2>
 
@@ -83,8 +83,8 @@ setStats(res.data);
           subValues={[
             { label: "Active", value: stats.activeUsers },
           ]}
-          iconColor="text-indigo-200"
-          bgColor="bg-indigo-600 shadow-indigo-300/50"
+          iconColor="text-secondary-200"
+          bgColor="bg-secondary-600 shadow-indigo-300/50"
         />
 
         <AdminStatCard
@@ -95,16 +95,16 @@ setStats(res.data);
             { label: "Approved", value: stats.approvedTuitions },
             { label: "Pending", value: stats.pendingTuitions },
           ]}
-          iconColor="text-green-200"
-          bgColor="bg-green-600 shadow-green-300/50"
+          iconColor="text-primary-600"
+          bgColor="bg-primary-200 shadow-green-300/50"
         />
 
         <AdminStatCard
           icon={FaDollarSign}
           title="Total Earnings"
           value={formatCurrency(stats.totalEarnings)}
-          iconColor="text-amber-200"
-          bgColor="bg-amber-600 shadow-amber-300/50"
+          iconColor="text-secondary-600"
+          bgColor="bg-secondary-400 shadow-amber-300/50"
         />
 
      
@@ -112,16 +112,16 @@ setStats(res.data);
           icon={FaBook}
           title="New Requests"
           value={stats.pendingTuitions} 
-          iconColor="text-red-200"
-          bgColor="bg-red-500 shadow-red-300/50"
+          iconColor="text-primary-200"
+          bgColor="bg-primary-500 shadow-red-300/50"
         />
         
       </div>
       
   
       <div className="mt-12">
-        <div className="bg-white p-6 rounded-2xl shadow-2xl">
-          <h3 className="text-2xl font-bold mb-6 text-gray-700">Weekly Earnings Trend</h3>
+        <div className=" p-6 rounded-2xl shadow-2xl">
+          <h3 className="text-2xl font-bold mb-6 ">Weekly Earnings Trend</h3>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart 

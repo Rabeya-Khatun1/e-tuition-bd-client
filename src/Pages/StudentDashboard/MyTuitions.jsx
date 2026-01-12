@@ -121,7 +121,7 @@ const handleRemoveTuition = (id)=>{
               <td>{tuition.location}</td>
               <td>{handleStatusBadge(tuition.status)}</td>
               <td>
-                {tuition.paymentStatus === 'paid' ? <p  className=" py-1 px-1 text-center text-green-500 font-semibold rounded-2xl shadow-md transition">paid</p>  : <p  className=" py-1 px-1 text-center bg-green-400  text-white font-semibold rounded-2xl shadow-md transition">Unpaid</p>}
+                {tuition.paymentStatus === 'paid' ? <p  className=" font-semibold text-primary-300">paid</p>  : <p>Unpaid</p>}
               </td>
               
               <td>{tuition.budget}</td>
