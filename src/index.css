@@ -1,10 +1,9 @@
-/* ----------------- Fonts ----------------- */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* ================== DAISYUI THEME ================== */
 @plugin "daisyui/theme" {
   name: "mygreen";
   default: true;
@@ -89,7 +88,7 @@
   --color-secondary-content: #111827;
 }
 
-/* ----------------- Body ----------------- */
+
 body {
   font-family: "DM Sans", sans-serif;
   font-weight: 300;
@@ -100,28 +99,24 @@ body {
   transition: all 0.3s ease;
 }
 
-/* ----------------- Headings ----------------- */
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-primary-400);
   transition: color 0.3s ease;
 }
 
 
-/* ----------------- Paragraphs ----------------- */
+
 p {
  color: var(--color-base-content);
   transition: color 0.3s ease, background-color 0.3s ease;
   padding: 0.25rem 0;
 }
 
-/* ----------------- Background Utility Classes ----------------- */
+
 .bg-base-50 { background-color: var(--color-base-50); }
 .bg-base-100 { background-color: var(--color-base-100); }
 .bg-base-200 { background-color: var(--color-base-200); }
 .bg-base-300 { background-color: var(--color-base-300); }
-.bg-base-400 { background-color: var(--color-base-400); }
-.bg-base-500 { background-color: var(--color-base-500); }
-.bg-base-600 { background-color: var(--color-base-600); }
 
 .bg-primary-50 { background-color: var(--color-primary-50); }
 .bg-primary-100 { background-color: var(--color-primary-100); }
@@ -139,10 +134,10 @@ p {
 .bg-secondary-500 { background-color: var(--color-secondary-500); }
 .bg-secondary-600 { background-color: var(--color-secondary-600); }
 
-/* ----------------- Border Utility Classes ----------------- */
+
 .border-secondary-500 { border-color: var(--color-secondary-500); }
 
-/* ----------------- Text Utility Classes ----------------- */
+
 .text-primary-50 { color: var(--color-primary-50); }
 .text-primary-100 { color: var(--color-primary-100); }
 .text-primary-200 { color: var(--color-primary-200); }
@@ -152,7 +147,6 @@ p {
 .text-primary-600 { color: var(--color-primary-600); }
 
 .text-secondary-50 { color: var(--color-secondary-50); }
-.text-secondary-100 { color: var(--color-secondary-100); }
 .text-secondary-200 { color: var(--color-secondary-200); }
 .text-secondary-300 { color: var(--color-secondary-300); }
 .text-secondary-400 { color: var(--color-secondary-400); }

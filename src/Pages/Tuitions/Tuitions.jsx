@@ -7,6 +7,7 @@ import { FaRegClock } from 'react-icons/fa';
 import { AnimatePresence } from "framer-motion";
 
 import { Link, useSearchParams } from 'react-router';
+import TuitionSkeleton from './TuitionSkeleton';
 
 const Tuitions = () => {
   const axios = useAxios();
@@ -22,7 +23,7 @@ const Tuitions = () => {
   const [page, setPage] = useState(pageFromURL);
   const [sortBy, setSortBy] = useState("");
 
-  const { data = {} } = useQuery({
+  const { data = {} , isLoading} = useQuery({
     queryKey: ['tuitions', page, subject, location, sortBy],
     queryFn: async () => {
       const res = await axios.get(
@@ -87,7 +88,11 @@ const Tuitions = () => {
 
  
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {tuitions.map((tuition, index) => (
+      {
+      isLoading ?  Array.from({ length: 8 }).map((_, i) => (
+              <TuitionSkeleton key={i} />
+            )) :
+      tuitions.map((tuition, index) => (
   <motion.div
     key={tuition._id}
     initial={{ opacity: 0, y: 40 }}

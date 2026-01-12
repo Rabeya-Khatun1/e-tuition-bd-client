@@ -3,7 +3,7 @@ import Logo from "../../Components/Logo/Logo";
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { FaRegMoon, FaSun, FaUserCircle } from "react-icons/fa";
+import { FaQuestionCircle, FaRegMoon, FaSignOutAlt, FaSun, FaUser, FaUserCircle } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaHome, FaBook, FaChalkboardTeacher, FaInfoCircle, FaEnvelope, FaTachometerAlt } from 'react-icons/fa';
 
@@ -102,25 +102,48 @@ const Navbar = () => {
                   )}
                 </div>
               </label>
-
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li><Link to="/dashboard/profile-settings">Profile</Link></li>
-                <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><button onClick={handleSignOut}>Logout</button></li>
-              </ul>
+<ul
+  tabIndex={0}
+  className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+>
+  <li>
+    <Link to="/dashboard/profile-settings">
+      <FaUser className="mr-2" /> Profile
+    </Link>
+  </li>
+  <li>
+    <Link to="/dashboard">
+      <FaTachometerAlt className="mr-2" /> Dashboard
+    </Link>
+  </li>
+  <li>
+    <Link to='/help'>
+      <FaQuestionCircle className="mr-2" /> Help
+    </Link>
+  </li>
+  <li>
+    <button onClick={handleSignOut}>
+      <FaSignOutAlt className="mr-2" /> Logout
+    </button>
+  </li>
+</ul>
             </div>
           ) : (
-            <Link
+            
+     <div className="flex gap-2">       <Link
               to="/login"
               className="btn btn-outline btn-primary btn-sm rounded-full"
             >
               Login / Register
             </Link>
+              <Link className="flex " to='/help'>
+      <FaQuestionCircle size={20} className="mt-2" /> 
+    </Link></div>
           )}
         </div>
+          
+
+
       </div>
 
      
@@ -148,6 +171,7 @@ const Navbar = () => {
         <nav className="flex flex-col gap-1 p-4">{links}</nav>
 
         <div className="p-4 border-t mt-auto">
+
           <label className="swap swap-rotate">
             <input type="checkbox" className="theme-controller" value="dark" />
             <span className="swap-off text-lg"><FaSun /></span>

@@ -49,7 +49,7 @@ setUser(currentUser);
 
 // axios.post('/getToken', loggedUser)
 // .then(res => {
-//     console.log('res.data is', res.data)
+//     .log('res.data is', res.data)
 //     localStorage.setItem('token', res.data.token)
 // })
 // .catch(err=> console.log(err))

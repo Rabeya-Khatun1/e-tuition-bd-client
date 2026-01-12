@@ -80,7 +80,7 @@ const HeroSection = () => {
               className="relative group px-8 md:px-10 py-3 md:py-4 overflow-hidden rounded-xl bg-white border-2 border-orange-500 font-bold uppercase tracking-widest text-sm md:text-base"
             >
               <span className="relative z-10 text-orange-600 group-hover:text-white transition-colors duration-300">
-                eTuitionBd
+                 Welcome to eTuitionBd
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </motion.button>
@@ -108,7 +108,7 @@ const HeroSection = () => {
             }}
             src={tutor}
             alt="Tutor Illustration"
-            className="max-h-[400px] md:max-h-[500px] w-auto drop-shadow-2xl"
+            className="max-h-[400px] md:max-h-[500px] w-auto drop-shadow-2xl rounded-2xl  bg-primary-50 p-4"
           />
         </motion.div>
       </motion.div>

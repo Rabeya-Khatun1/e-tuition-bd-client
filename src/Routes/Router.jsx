@@ -35,6 +35,7 @@ import Blog from "../Pages/ExtraSections/Blog";
 import WhyChooseUs from "../Pages/WhyChooseUs/WhyChooseUs";
 import FAQ from "../Pages/ExtraSections/FAQ";
 import PrivacyPolicy from "../Pages/ExtraSections/Privacy";
+import HelpComponent from "../Pages/ExtraSections/Help";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
   {
     path: '/faq',
     Component: FAQ,
+  },
+  {
+    path: '/help',
+    Component: HelpComponent,
   },
   {
     path: '/privacy-policy',

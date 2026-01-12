@@ -28,7 +28,7 @@ const CTA = () => {
               <div className="card-actions justify-start">
                 <button 
                   onClick={() => navigate('/register')}
-                  className="btn btn-secondary btn-lg shadow-lg border-none"
+                  className="btn btn-primary btn-lg shadow-lg border-none"
                 >
                   Post a Tuition <UserPlus size={20} />
                 </button>
@@ -55,7 +55,7 @@ const CTA = () => {
               <div className="card-actions justify-start">
                 <button 
                   onClick={() => navigate('/tuitions')}
-                  className="btn btn-accent btn-lg shadow-lg border-none"
+                  className="btn bg-primary-400 btn-lg shadow-lg border-none"
                 >
                   Find Tuition Jobs <Search size={20} />
                 </button>
@@ -72,7 +72,7 @@ const CTA = () => {
             Reviewing this project for a job task? 
             <button 
               onClick={() => navigate('/dashboard')} 
-              className="link link-primary ml-1"
+              className="link link-primary-500 ml-1"
             >
               Access Admin Credentials here.
             </button>
