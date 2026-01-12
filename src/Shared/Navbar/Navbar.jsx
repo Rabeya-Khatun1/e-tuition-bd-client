@@ -24,12 +24,11 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Dark mode toggle function
   const handleThemeToggle = (e) => {
     if (e.target.checked) {
       document.documentElement.setAttribute("data-theme", "dark");
     } else {
-      document.documentElement.setAttribute("data-theme", "mygreen"); // default light theme
+      document.documentElement.setAttribute("data-theme", "mygreen"); 
     }
   };
 
@@ -74,7 +73,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* Mobile menu button */}
+  
         <button
           onClick={() => setMobileOpen(true)}
           className="lg:hidden text-primary-400"
@@ -87,7 +86,7 @@ const Navbar = () => {
           <Logo />
         </Link>
 
-        {/* Desktop links */}
+      
         <div className="hidden lg:flex gap-1">{links}</div>
 
         {/* Right section */}
