@@ -17,6 +17,7 @@ import Categories from "../ExtraSections/Categories";
 import Highlights from "../ExtraSections/Highlights";
 import CTA from "../ExtraSections/CTA";
 import ScrollToTopButton from "../ScrollToTopButton";
+import AIChatModal from "../../Shared/AiChat";
 
 const Home = () => {
   // Smooth Scroll
@@ -48,7 +49,7 @@ const Home = () => {
   return (
     <div>
       <title>eTuitionBd-Home</title>
-
+<AIChatModal></AIChatModal>
       {/* 1. Hero */}
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
         <HeroSection />
