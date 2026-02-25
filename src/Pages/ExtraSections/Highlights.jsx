@@ -3,8 +3,8 @@ import { Link } from "react-router";
 
 const Highlights = () => {
   return (
-    <section className="py-24 ">
-      <div className="container mx-auto px-4">
+    <section className=" ">
+      <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Left Side: Image/Visual */}
           <div className="lg:w-1/2 relative">

@@ -15,7 +15,7 @@ const Contact = () => {
   };
 
   return (
-    <section className=" py-24" id="contact">
+    <section className="" id="contact">
       <ToastContainer />
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
@@ -48,7 +48,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-primary-100 text-sm">Call Us</p>
-                <p className="font-bold">+880 1234 567 890</p>
+                <p className="font-bold text-white">+880 1234 567 890</p>
               </div>
             </div>
 
@@ -58,7 +58,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-primary-100 text-sm">Email Us</p>
-                <p className="font-bold">support@etuitionbd.com</p>
+                <p className="font-bold text-primary">support@etuitionbd.com</p>
               </div>
             </div>
 
@@ -68,7 +68,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-primary-100 text-sm">Our Office</p>
-                <p className="font-bold">Dhaka, Bangladesh</p>
+                <p className="font-bold text-primary">Dhaka, Bangladesh</p>
               </div>
             </div>
 
@@ -78,7 +78,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-primary-100 text-sm">Working Hours</p>
-                <p className="font-bold">Sat - Thu: 10AM - 8PM</p>
+                <p className="font-bold text-primary">Sat - Thu: 10AM - 8PM</p>
               </div>
             </div>
 

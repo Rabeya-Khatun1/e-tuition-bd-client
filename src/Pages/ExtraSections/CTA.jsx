@@ -8,7 +8,7 @@ const CTA = () => {
 
   return (
     <section className="py-16 px-4 bg-base-200">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1250px] mx-auto">
         <div className="grid md:grid-cols-2 gap-8">
           
    

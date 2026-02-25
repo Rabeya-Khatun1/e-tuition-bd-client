@@ -8,13 +8,14 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-24 bg-base-200">
-      <div className="max-w-4xl mx-auto px-4">
+    <section className="">
+      <div className="max-w-[1250px] mx-auto px-4">
         <h2 className="text-4xl font-bold text-primary-600 text-center mb-12">Common Questions</h2>
         <div className="space-y-4">
           {faqs.map((faq, i) => (
             <div key={i} className="collapse collapse-arrow bg-base-100 rounded-2xl border border-secondary-200">
-              <input type="radio" name="my-accordion-2" defaultChecked={i === 0} /> 
+              {/* Checkbox type allows toggle open/close */}
+              <input type="checkbox" defaultChecked={i === 0} /> 
               <div className="collapse-title text-xl font-bold text-primary-500 py-6">
                 {faq.q}
               </div>
@@ -28,4 +29,5 @@ const FAQ = () => {
     </section>
   );
 };
+
 export default FAQ;

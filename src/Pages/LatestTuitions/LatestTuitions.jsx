@@ -25,12 +25,16 @@ return res.data.tuitions;
 const tuitions = data || []
 
   return (
-   <div className="px-6 py-20 ">
-  <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 text-center mb-14">
+   <div className="px-6 py-20">
+  <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 text-center my-2">
     Latest Tuition Posts
   </h2>
 
-<p className="my-5 text-black text-center">Discover skilled, verified, and passionate tutors ready to help students shine. Each tutor brings unique expertise, real experience, and a friendly teaching style—perfect for guiding learners toward success.</p>
+<p className="my-4 text-black text-center leading-relaxed">
+  Discover skilled, verified, and passionate tutors dedicated to helping students excel. 
+  Each tutor brings proven expertise, real-world experience, and a supportive teaching approach— 
+  empowering learners to grow with confidence and achieve lasting success.
+</p>
 
 
   <Swiper
@@ -47,17 +51,17 @@ const tuitions = data || []
       delay: 1500,
       disableOnInteraction: false,
     }}
-    className="mySwiper"
+    className=""
   >
     {tuitions.map((tuition, index) => (
-      <SwiperSlide key={index}>
+      <SwiperSlide key={index} className="overflow-visible">
          <motion.div
             key={tuition.id}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-linear-to-br from-white to-purple-50 hover:scale-105 transition-transform shadow-lg hover:shadow-2xl rounded-2xl p-6 border border-gray-100 flex flex-col justify-between"
+           className="bg-linear-to-br from-white to-purple-50 hover:scale-105 hover:border-2 border-primary transition-transform rounded-2xl p-6 flex flex-col justify-between relative overflow-visible"
           >
             <div>
               <h3 className="font-semibold text-xl text-gray-800 mb-4">

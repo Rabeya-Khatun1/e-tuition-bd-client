@@ -24,7 +24,7 @@ const { data = {} } = useQuery({
 const tutors = data.tutors || [];
 
   return (
-    <section className="pt-20">
+    <section className="">
       <div className="container mx-auto px-4">
 
         {/* Hero Section */}
@@ -75,7 +75,7 @@ const tutors = data.tutors || [];
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true, margin: "-50px" }}
              transition={{ duration: 0.6, delay: index * 0.1 }}
-             className="bg-linear-to-br from-white to-purple-50 hover:scale-105 transition-transform shadow-lg hover:shadow-2xl rounded-2xl p-6 border border-gray-100 flex flex-col justify-between relative"
+             className="bg-linear-to-br from-white to-purple-50 hover:scale-105 transition-transform shadow-lg hover:border-2 border-primary hover:shadow-2xl rounded-2xl p-6 flex flex-col justify-between relative"
            >
            
            <div>

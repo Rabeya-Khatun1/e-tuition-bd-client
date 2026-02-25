@@ -32,7 +32,7 @@ const HeroSection = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full"
+        className="max-w-[1250px] mx-auto grid md:grid-cols-2 gap-12 items-center w-full"
       >
         {/* Left side - Content */}
         <div className="space-y-6 md:space-y-8 text-center md:text-left">
